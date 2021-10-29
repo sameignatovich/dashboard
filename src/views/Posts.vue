@@ -10,17 +10,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for='post in posts' :key='post.id'>
-        <th scope="row">{{ post.id }}</th>
-        <td>{{ post.userId }}</td>
-        <td>{{ post.title }}</td>
-        <td>{{ post.body }}</td>
-        <td>
-          <button @click='deletePost(post.id)' class='btn bnt-sm btn-danger'>
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </td>
-      </tr>
+      <transition-group name="post">
+        <tr v-for='post in posts' :key='post.id' class='post-item'>
+          <th scope="row">{{ post.id }}</th>
+          <td>{{ post.userId }}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.body }}</td>
+          <td>
+            <button @click='deletePost(post.id)' class='btn bnt-sm btn-danger'>
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </td>
+        </tr>
+      </transition-group>
     </tbody>
   </table>
 </template>
@@ -44,4 +46,13 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+.post-enter-active,
+.post-leave-active {
+  transition: all 1s ease;
+}
+.post-enter-from,
+.post-leave-to {
+  transform: scale(1, 0);
+}
+
 </style>

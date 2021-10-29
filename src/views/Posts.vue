@@ -21,14 +21,13 @@
 
 <script>
 export default {
-  data: () => ({
-    posts: [],
-  }),
+  computed: {
+    posts() {
+      return this.$store.getters['posts/posts'];
+    },
+  },
   mounted() {
-    this.$http.get('/posts')
-      .then((response) => {
-        this.posts = response.data;
-      });
+    this.$store.dispatch('posts/fetchPosts');
   },
 };
 </script>

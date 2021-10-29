@@ -52,7 +52,8 @@ export default {
 }
 .post-enter-from,
 .post-leave-to {
-  transform: scale(1, 0);
+  transform: translateX(20px);
+  opacity: 0;
 }
 
 </style>

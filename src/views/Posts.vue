@@ -6,6 +6,7 @@
         <th scope="col">UserID</th>
         <th scope="col">Title</th>
         <th scope="col">Body</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -14,6 +15,11 @@
         <td>{{ post.userId }}</td>
         <td>{{ post.title }}</td>
         <td>{{ post.body }}</td>
+        <td>
+          <button @click='deletePost(post.id)' class='btn bnt-sm btn-danger'>
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -24,6 +30,11 @@ export default {
   computed: {
     posts() {
       return this.$store.getters['posts/posts'];
+    },
+  },
+  methods: {
+    deletePost(postId) {
+      this.$store.dispatch('posts/deletePost', postId);
     },
   },
   mounted() {

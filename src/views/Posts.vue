@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">User</th>
+        <th scope="col">UserID</th>
         <th scope="col">Title</th>
         <th scope="col">Body</th>
       </tr>

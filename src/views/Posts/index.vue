@@ -38,7 +38,7 @@ export default {
   methods: {
     deletePost(postId) {
       this.$store.dispatch('posts/deletePost', postId)
-        .then(() => this.$toast.success(`Post with id ${postId} deleted successful`));
+        .then(() => this.$toast.success(`Post with id ${postId} deleted`));
     },
   },
   beforeMount() {

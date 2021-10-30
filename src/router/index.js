@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/posts',
     name: 'Posts',
-    component: () => import(/* webpackChunkName: "posts" */ '../views/Posts.vue'),
+    component: () => import(/* webpackChunkName: "posts" */ '../views/Posts/index.vue'),
     meta: {
       title: 'Posts',
     },

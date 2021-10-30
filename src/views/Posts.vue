@@ -1,30 +1,32 @@
 <template>
-  <table class='table'>
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">UserID</th>
-        <th scope="col">Title</th>
-        <th scope="col">Body</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <transition-group name="post">
-        <tr v-for='post in posts' :key='post.id' class='post-item'>
-          <th scope="row">{{ post.id }}</th>
-          <td>{{ post.userId }}</td>
-          <td>{{ post.title }}</td>
-          <td>{{ post.body }}</td>
-          <td>
-            <button @click='deletePost(post.id)' class='btn bnt-sm btn-danger'>
-              <i class="bi bi-x-lg"></i>
-            </button>
-          </td>
+  <div class='container'>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">UserID</th>
+          <th scope="col">Title</th>
+          <th scope="col">Body</th>
+          <th scope="col"></th>
         </tr>
-      </transition-group>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <transition-group name="post">
+          <tr v-for='post in posts' :key='post.id' class='post-item'>
+            <th scope="row">{{ post.id }}</th>
+            <td>{{ post.userId }}</td>
+            <td>{{ post.title }}</td>
+            <td>{{ post.body }}</td>
+            <td>
+              <button @click='deletePost(post.id)' class='btn bnt-sm btn-danger'>
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </td>
+          </tr>
+        </transition-group>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -36,10 +38,11 @@ export default {
   },
   methods: {
     deletePost(postId) {
-      this.$store.dispatch('posts/deletePost', postId);
+      this.$store.dispatch('posts/deletePost', postId)
+        .then(() => this.$toast.success(`Post with id ${postId} deleted successful`));
     },
   },
-  mounted() {
+  beforeMount() {
     this.$store.dispatch('posts/fetchPosts');
   },
 };

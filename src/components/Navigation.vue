@@ -26,6 +26,12 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link to="/users" class='nav-link'>
+              <i class="bi bi-people-fill"></i>
+              Users
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link to="/about" class='nav-link'>
               <i class="bi bi-info-square-fill"></i>
               About

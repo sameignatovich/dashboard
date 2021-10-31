@@ -39,7 +39,16 @@ const postsModule = {
       });
     },
     deletePost({ commit }, postId) {
-      commit('DELETE_POST', postId);
+      return new Promise((resolve, reject) => {
+        axios.delete(`/posts/${postId}`)
+          .then((response) => {
+            commit('DELETE_POST', postId);
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
     },
   },
   getters: {

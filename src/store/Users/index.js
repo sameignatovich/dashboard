@@ -39,7 +39,16 @@ const usersModule = {
       });
     },
     deleteUser({ commit }, userId) {
-      commit('DELETE_USER', userId);
+      return new Promise((resolve, reject) => {
+        axios.delete(`/users/${userId}`)
+          .then((response) => {
+            commit('DELETE_USER', userId);
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
     },
   },
   getters: {

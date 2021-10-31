@@ -3,7 +3,6 @@
     <th scope="row">{{ post.id }}</th>
     <td>{{ post.userId }}</td>
     <td>{{ post.title }}</td>
-    <td>{{ post.body }}</td>
     <td>
       <router-link  :to="`/posts/${post.id}`"
                     class='btn bnt-sm btn-primary'>

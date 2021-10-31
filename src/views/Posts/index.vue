@@ -9,6 +9,7 @@
             <th scope="col">Title</th>
             <th scope="col">Body</th>
             <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <caption>List of users</caption>

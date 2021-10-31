@@ -5,6 +5,12 @@
     <td>{{ post.title }}</td>
     <td>{{ post.body }}</td>
     <td>
+      <router-link  :to="`/posts/${post.id}`"
+                    class='btn bnt-sm btn-primary'>
+        <i class="bi bi-eye-fill"></i>
+      </router-link>
+    </td>
+    <td>
       <button @click="$emit('deletePost')"
               class='btn bnt-sm btn-danger'>
         <i class="bi bi-x-lg"></i>

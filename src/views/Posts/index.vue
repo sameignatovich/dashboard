@@ -14,11 +14,23 @@
         <caption>List of users</caption>
         <tbody>
           <transition-group name="post">
-            <PostRow  v-for='post in posts'
-                      :key='post.id'
-                      :post='post'
-                      class='post-item'
-                      @deletePost='deletePost(post.id)' />
+            <tr v-for='post in posts' :key='post.id' class='post-item'>
+              <th scope="row">{{ post.id }}</th>
+              <td>{{ post.userId }}</td>
+              <td>{{ post.title }}</td>
+              <td>
+                <router-link  :to="`/posts/${post.id}`"
+                              class='btn bnt-sm btn-primary'>
+                  <i class="bi bi-eye-fill"></i>
+                </router-link>
+              </td>
+              <td>
+                <button @click="deletePost(post.id)"
+                        class='btn bnt-sm btn-danger'>
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </td>
+            </tr>
           </transition-group>
         </tbody>
       </table>
@@ -27,8 +39,6 @@
 </template>
 
 <script>
-import PostRow from './components/post-row.vue';
-
 export default {
   computed: {
     posts() {
@@ -43,9 +53,6 @@ export default {
   },
   beforeMount() {
     this.$store.dispatch('posts/fetchPosts');
-  },
-  components: {
-    PostRow,
   },
 };
 </script>

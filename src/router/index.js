@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import Users from './Users/index';
 import Posts from './Posts/index';
 
 const routes = [
@@ -11,14 +12,6 @@ const routes = [
     },
   },
   {
-    path: '/users',
-    name: 'Users',
-    component: () => import(/* webpackChunkName: "users" */ '../views/Users/index.vue'),
-    meta: {
-      title: 'Users',
-    },
-  },
-  {
     path: '/about',
     name: 'About',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
@@ -26,6 +19,7 @@ const routes = [
       title: 'About',
     },
   },
+  ...Users,
   ...Posts,
 ];
 

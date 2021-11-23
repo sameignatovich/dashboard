@@ -8,6 +8,7 @@
             <th scope="col">Name</th>
             <th scope="col">Username</th>
             <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <caption>List of users</caption>
@@ -17,6 +18,12 @@
               <th scope="row">{{ user.id }}</th>
               <td>{{ user.name }}</td>
               <td>{{ user.username }}</td>
+              <td>
+                <router-link  :to="`/users/${user.id}`"
+                              class='btn bnt-sm btn-primary'>
+                  <i class="bi bi-eye-fill"></i>
+                </router-link>
+              </td>
               <td>
                 <button @click="deleteUser(user.id)"
                         class='btn bnt-sm btn-danger'>

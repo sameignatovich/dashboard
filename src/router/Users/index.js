@@ -7,4 +7,12 @@ export default [
       title: 'Users',
     },
   },
+  {
+    path: '/users/:id',
+    name: 'User',
+    component: () => import(/* webpackChunkName: "users" */ '@/views/Users/show.vue'),
+    meta: {
+      title: 'Downloading...',
+    },
+  },
 ];

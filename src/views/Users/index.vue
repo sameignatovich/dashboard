@@ -7,19 +7,23 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <caption>List of users</caption>
         <tbody>
           <transition-group name="user">
-            <UserRow  v-for='user in users'
-                      :key='user.id'
-                      :user='user'
-                      class='user-item'
-                      @deleteUser='deleteUser(user.id)' />
+            <tr v-for='user in users' :key='user.id'>
+              <th scope="row">{{ user.id }}</th>
+              <td>{{ user.name }}</td>
+              <td>{{ user.username }}</td>
+              <td>
+                <button @click="deleteUser(user.id)"
+                        class='btn bnt-sm btn-danger'>
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </td>
+            </tr>
           </transition-group>
         </tbody>
       </table>
@@ -28,8 +32,6 @@
 </template>
 
 <script>
-import UserRow from './components/user-row.vue';
-
 export default {
   computed: {
     users() {
@@ -44,9 +46,6 @@ export default {
   },
   beforeMount() {
     this.$store.dispatch('users/fetchUsers');
-  },
-  components: {
-    UserRow,
   },
 };
 </script>

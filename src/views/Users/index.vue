@@ -5,7 +5,7 @@
         <thead class="table-dark">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Full name</th>
             <th scope="col">Username</th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -16,7 +16,7 @@
           <transition-group name="user">
             <tr v-for='user in users' :key='user.id'>
               <th scope="row">{{ user.id }}</th>
-              <td>{{ user.name }}</td>
+              <td>{{ user.first_name }} {{ user.last_name }}</td>
               <td>{{ user.username }}</td>
               <td>
                 <router-link  :to="`/users/${user.id}`"

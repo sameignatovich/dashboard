@@ -6,19 +6,13 @@
           <img :src="`https://via.placeholder.com/600?text=User+Avatar+${user.id}`" class="card-img-top" alt="Avatar">
           <div class="card-info m-2">
             <div class="text-center">
-              <strong>{{ user.name }}</strong> |
+              <strong>{{ user.first_name }} {{ user.last_name }}</strong> |
               <i>@{{ user.username }}</i>
             </div>
             <hr/>
-            <p><b>Company:</b> {{ user.company.name }}</p>
-            <hr/>
-            <p><b>Website:</b> {{ user.website }}</p>
             <p><b>Email:</b> {{ user.email }}</p>
             <p><b>Phone:</b> {{ user.phone }}</p>
-            <p><b>Address:</b> {{ ` ${user.address.street},
-                                    ${user.address.suite},
-                                    ${user.address.city},
-                                    ${user.address.zipcode}` }}</p>
+            <p><b>Address:</b> {{ user.address }}</p>
           </div>
         </div>
       </div>

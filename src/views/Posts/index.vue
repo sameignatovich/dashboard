@@ -1,5 +1,33 @@
 <template>
   <div class='container'>
+      <h5 class="display-5 text-center">List of posts</h5>
+      <div class="row row-cols-auto">
+        <div class="col">
+          <Pagination :total-pages="totalPages"
+                      :current-page="page"
+                      @change-page="changePage" />
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <span class="input-group-text">Count per page</span>
+            <select v-model="perPage"
+                    class="form-select"
+                    aria-label=".form-select-sm">
+              <option disabled>Select per-page count</option>
+              <option>10</option>
+              <option>25</option>
+              <option>50</option>
+              <option>100</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <p class="mt-2">
+            Total posts:
+            {{ postsCount }}
+          </p>
+        </div>
+      </div>
     <div class='table-responsive'>
       <table class='table table-striped table-hover caption-top'>
         <thead class="table-dark">
@@ -11,7 +39,6 @@
             <th scope="col"></th>
           </tr>
         </thead>
-        <caption>List of posts</caption>
         <tbody>
           <transition-group name="post">
             <tr v-for='post in posts' :key='post.id' class='post-item'>
@@ -39,20 +66,64 @@
 </template>
 
 <script>
+import Pagination from '@/components/Pagination.vue';
+
 export default {
+  data() {
+    return {
+      page: 1,
+      perPage: 10,
+    };
+  },
+  watch: {
+    perPage() {
+      this.fetchPosts();
+    },
+  },
   computed: {
     posts() {
       return this.$store.getters['posts/posts'];
     },
+    postsCount() {
+      return this.$store.getters['posts/totalPostsCount'];
+    },
+    totalPages() {
+      return Math.ceil(this.postsCount / this.perPage);
+    },
+    showPages() {
+      const range = [];
+
+      for (let i = this.startPage; i <= this.endPage; i += 1) {
+        range.push({
+          id: i,
+          isDisabled: i === this.page,
+        });
+      }
+
+      return range;
+    },
   },
   methods: {
+    fetchPosts() {
+      this.$store.dispatch('posts/fetchPosts', {
+        page: this.page,
+        perPage: this.perPage,
+      });
+    },
     deletePost(postId) {
       this.$store.dispatch('posts/deletePost', postId)
         .then(() => this.$toast.success(`Post with id ${postId} deleted`));
     },
+    changePage(page) {
+      this.page = page;
+      this.fetchPosts();
+    },
   },
   beforeMount() {
-    this.$store.dispatch('posts/fetchPosts');
+    this.fetchPosts();
+  },
+  components: {
+    Pagination,
   },
 };
 </script>

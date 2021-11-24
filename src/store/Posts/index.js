@@ -5,44 +5,46 @@ const postsModule = {
 
   state() {
     return {
-      loaded: false,
       posts: [],
+      totalPostsCount: 0,
     };
   },
   mutations: {
-    SET_LOADING(state, status) {
-      state.loaded = status;
-    },
     SET_POSTS(state, posts) {
       state.posts = posts;
+    },
+    SET_TOTAL_POSTS_COUNT(state, count) {
+      state.totalPostsCount = count;
     },
     DELETE_POST(state, postId) {
       state.posts.splice(state.posts.findIndex((i) => i.id === postId), 1);
     },
   },
   actions: {
-    fetchPosts({ commit, state }) {
+    fetchPosts({ commit }, { page, perPage }) {
       return new Promise((resolve, reject) => {
-        if (!state.loaded) {
-          axios.get('/posts')
-            .then((response) => {
-              commit('SET_POSTS', response.data);
-              commit('SET_LOADING', true);
-              resolve(response);
-            })
-            .catch((error) => {
-              reject(error);
-            });
-        } else {
-          resolve();
-        }
+        axios.get('/posts', {
+          params: {
+            page,
+            perPage,
+          },
+        })
+          .then((response) => {
+            commit('SET_POSTS', response.data.posts);
+            commit('SET_TOTAL_POSTS_COUNT', response.data.totalPostsCount);
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
       });
     },
-    deletePost({ commit }, postId) {
+    deletePost({ commit, state }, postId) {
       return new Promise((resolve, reject) => {
         axios.delete(`/posts/${postId}`)
           .then((response) => {
             commit('DELETE_POST', postId);
+            commit('SET_TOTAL_POSTS_COUNT', state.totalPostsCount - 1);
             resolve(response);
           })
           .catch((error) => {
@@ -53,6 +55,7 @@ const postsModule = {
   },
   getters: {
     posts: (state) => state.posts,
+    totalPostsCount: (state) => state.totalPostsCount,
   },
 };
 

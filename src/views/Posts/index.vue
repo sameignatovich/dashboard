@@ -11,10 +11,7 @@
           <SelectItemsCount @change-per-page-count="changeCount" />
         </div>
         <div class="col">
-          <p class="mt-2">
-            Total posts:
-            {{ postsCount }}
-          </p>
+          <ItemsCounter :counting-items="`posts`" :items-counter="postsCount" class="mt-2" />
         </div>
       </div>
     <div class='table-responsive'>
@@ -57,6 +54,7 @@
 <script>
 import Pagination from '@/components/Pagination.vue';
 import SelectItemsCount from '@/components/SelectItemsCount.vue';
+import ItemsCounter from '@/components/ItemsCounter.vue';
 
 export default {
   data() {
@@ -114,6 +112,7 @@ export default {
   components: {
     Pagination,
     SelectItemsCount,
+    ItemsCounter,
   },
 };
 </script>

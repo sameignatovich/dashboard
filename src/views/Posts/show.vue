@@ -7,11 +7,11 @@
       <p>
         <small>
           wrote by user
-          <b>{{ post.userId }}</b>
+          <b>{{ post.user_id }}</b>
         </small>
       </p>
       <div class='post-body'>
-        {{ post.body }}
+        {{ post.text }}
       </div>
     </div>
   </div>

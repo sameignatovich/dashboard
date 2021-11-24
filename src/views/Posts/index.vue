@@ -16,7 +16,7 @@
           <transition-group name="post">
             <tr v-for='post in posts' :key='post.id' class='post-item'>
               <th scope="row">{{ post.id }}</th>
-              <td>{{ post.userId }}</td>
+              <td>{{ post.user_id }}</td>
               <td>{{ post.title }}</td>
               <td>
                 <router-link  :to="`/posts/${post.id}`"

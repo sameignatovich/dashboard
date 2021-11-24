@@ -1,19 +1,13 @@
 <template>
   <div class='container'>
-      <h5 class="display-5 text-center">List of posts</h5>
-      <div class="row row-cols-auto">
-        <div class="col">
-          <Pagination :total-pages="totalPages"
-                      :current-page="page"
-                      @change-page="changePage" />
-        </div>
-        <div class="col">
-          <SelectItemsCount @change-per-page-count="changeCount" />
-        </div>
-        <div class="col">
-          <ItemsCounter :counting-items="`posts`" :items-counter="postsCount" class="mt-2" />
-        </div>
-      </div>
+    <h5 class="display-5 text-center">List of posts</h5>
+    <TableHeader  :item-name="`posts`"
+                  :table-items="posts"
+                  :total-items-count="postsCount"
+                  :items-per-page="perPage"
+                  :current-page="page"
+                  @change-page="changePage"
+                  @change-per-page-count="changePerPageCount" />
     <div class='table-responsive'>
       <table class='table table-striped table-hover caption-top'>
         <thead class="table-dark">
@@ -52,9 +46,7 @@
 </template>
 
 <script>
-import Pagination from '@/components/Pagination.vue';
-import SelectItemsCount from '@/components/SelectItemsCount.vue';
-import ItemsCounter from '@/components/ItemsCounter.vue';
+import TableHeader from '@/components/TableHeader.vue';
 
 export default {
   data() {
@@ -69,21 +61,6 @@ export default {
     },
     postsCount() {
       return this.$store.getters['posts/totalPostsCount'];
-    },
-    totalPages() {
-      return Math.ceil(this.postsCount / this.perPage);
-    },
-    showPages() {
-      const range = [];
-
-      for (let i = this.startPage; i <= this.endPage; i += 1) {
-        range.push({
-          id: i,
-          isDisabled: i === this.page,
-        });
-      }
-
-      return range;
     },
   },
   methods: {
@@ -101,7 +78,7 @@ export default {
       this.page = page;
       this.fetchPosts();
     },
-    changeCount(count) {
+    changePerPageCount(count) {
       this.perPage = count;
       this.fetchPosts();
     },
@@ -110,9 +87,7 @@ export default {
     this.fetchPosts();
   },
   components: {
-    Pagination,
-    SelectItemsCount,
-    ItemsCounter,
+    TableHeader,
   },
 };
 </script>

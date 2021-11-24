@@ -8,18 +8,7 @@
                       @change-page="changePage" />
         </div>
         <div class="col">
-          <div class="input-group">
-            <span class="input-group-text">Count per page</span>
-            <select v-model="perPage"
-                    class="form-select"
-                    aria-label=".form-select-sm">
-              <option disabled>Select per-page count</option>
-              <option>10</option>
-              <option>25</option>
-              <option>50</option>
-              <option>100</option>
-            </select>
-          </div>
+          <SelectItemsCount @change-per-page-count="changeCount" />
         </div>
         <div class="col">
           <p class="mt-2">
@@ -67,6 +56,7 @@
 
 <script>
 import Pagination from '@/components/Pagination.vue';
+import SelectItemsCount from '@/components/SelectItemsCount.vue';
 
 export default {
   data() {
@@ -74,11 +64,6 @@ export default {
       page: 1,
       perPage: 10,
     };
-  },
-  watch: {
-    perPage() {
-      this.fetchPosts();
-    },
   },
   computed: {
     posts() {
@@ -118,12 +103,17 @@ export default {
       this.page = page;
       this.fetchPosts();
     },
+    changeCount(count) {
+      this.perPage = count;
+      this.fetchPosts();
+    },
   },
   beforeMount() {
     this.fetchPosts();
   },
   components: {
     Pagination,
+    SelectItemsCount,
   },
 };
 </script>

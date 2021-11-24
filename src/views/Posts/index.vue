@@ -11,7 +11,7 @@
             <th scope="col"></th>
           </tr>
         </thead>
-        <caption>List of users</caption>
+        <caption>List of posts</caption>
         <tbody>
           <transition-group name="post">
             <tr v-for='post in posts' :key='post.id' class='post-item'>

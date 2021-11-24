@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row mt-3">
       <div class="col-md-3">
-        <div class="card">
+        <div v-if="user" class="card">
           <img :src="`https://via.placeholder.com/600?text=User+Avatar+${user.id}`" class="card-img-top" alt="Avatar">
           <div class="card-info m-2">
             <div class="text-center">
@@ -23,7 +23,24 @@
         </div>
       </div>
       <div class="col-md-9">
-        Some info will be here soon...
+        <h5 class="display-5 text-center">User's posts</h5>
+        <table class="table">
+          <tbody>
+            <tr v-for="post in posts"
+                :key="post.id">
+              <th>
+                <router-link :to="`/posts/${post.id}`">
+                  #{{ post.id }}
+                </router-link>
+              </th>
+              <td>
+                <strong>
+                  {{ post.title }}
+                </strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -33,7 +50,8 @@
 export default {
   data() {
     return {
-      user: {},
+      user: '',
+      posts: '',
     };
   },
   computed: {
@@ -54,9 +72,22 @@ export default {
           });
       });
     },
+    fetchUserPosts(userId) {
+      return new Promise((resolve, reject) => {
+        this.$http.get(`/users/${userId}/posts`)
+          .then((response) => {
+            this.posts = response.data;
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
   },
   beforeMount() {
     this.fetchUser(this.userId);
+    this.fetchUserPosts(this.userId);
   },
 };
 </script>

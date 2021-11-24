@@ -5,6 +5,7 @@ module.exports = {
     workboxPluginMode: 'GenerateSW',
     workboxOptions: {
       navigateFallback: 'index.html',
+      skipWaiting: true,
     },
     themeColor: '#6C757D',
     msTileColor: '#6C757D',

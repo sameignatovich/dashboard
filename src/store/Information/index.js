@@ -5,7 +5,16 @@ const informationModule = {
 
   state() {
     return {
-      info: {},
+      info: {
+        users: {
+          users_count: '',
+          last_user: {},
+        },
+        posts: {
+          posts_count: '',
+          last_post: {},
+        },
+      },
     };
   },
   mutations: {

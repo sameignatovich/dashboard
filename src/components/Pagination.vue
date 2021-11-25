@@ -2,11 +2,13 @@
   <nav aria-label="Posts pages navigation">
     <ul class="pagination">
       <li class="page-item" :class="isFirst ? 'disabled' : ''">
-        <a class="page-link" href="#" @click.prevent="toFirstPage">First</a>
+        <a class="page-link" href="#" @click.prevent="toFirstPage">
+          <i class="bi bi-chevron-double-left"></i>
+        </a>
       </li>
       <li class="page-item" :class="isFirst ? 'disabled' : ''">
         <a class="page-link" href="#" @click.prevent="toPreviousPage">
-          <i class="bi bi-arrow-bar-left"></i>
+          <i class="bi bi-chevron-left"></i>
         </a>
       </li>
 
@@ -21,11 +23,13 @@
 
       <li class="page-item" :class="isLast ? 'disabled' : ''">
         <a class="page-link" href="#" @click="toNextPage">
-          <i class="bi bi-arrow-bar-right"></i>
+          <i class="bi bi-chevron-right"></i>
         </a>
       </li>
       <li class="page-item" :class="isLast ? 'disabled' : ''">
-        <a class="page-link" href="#" @click="toLastPage">Last</a>
+        <a class="page-link" href="#" @click="toLastPage">
+          <i class="bi bi-chevron-double-right"></i>
+        </a>
       </li>
     </ul>
   </nav>

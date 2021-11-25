@@ -83,6 +83,11 @@ export default {
     this.fetchUser(this.userId);
     this.fetchUserPosts(this.userId);
   },
+  watch: {
+    user() {
+      this.$title(`@${this.user.username}`);
+    },
+  },
 };
 </script>
 

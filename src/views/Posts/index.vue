@@ -84,6 +84,7 @@ export default {
     },
   },
   beforeMount() {
+    this.$title('Posts');
     this.fetchPosts();
   },
   components: {

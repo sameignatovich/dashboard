@@ -7,6 +7,8 @@
 
 <script>
 export default {
-  name: 'Home',
+  beforeMount() {
+    this.$title('Home');
+  },
 };
 </script>

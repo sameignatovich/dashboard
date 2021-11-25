@@ -52,6 +52,7 @@ export default {
     },
   },
   beforeMount() {
+    this.$title('Users');
     this.$store.dispatch('users/fetchUsers');
   },
 };

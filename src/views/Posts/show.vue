@@ -1,13 +1,13 @@
 <template>
   <div class='container'>
-    <div class="shadow-lg p-3 mb-5 bg-body rounded">
+    <div class="shadow-lg p-3 mt-3 bg-body rounded">
       <h2>
         {{ post.title }}
       </h2>
       <p>
         <small>
           wrote by user
-          <b>{{ post.user_id }}</b>
+          <router-link :to="`/users/${post.user_id}`">{{ post.user_id }}</router-link>
         </small>
       </p>
       <div class='post-body'>
@@ -20,31 +20,19 @@
 <script>
 export default {
   data() {
-    return {
-      post: {},
-    };
   },
   computed: {
     postId() {
       return this.$route.params.id;
     },
-  },
-  methods: {
-    fetchPost(postId) {
-      return new Promise((resolve, reject) => {
-        this.$http.get(`/posts/${postId}`)
-          .then((response) => {
-            this.post = response.data;
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
+    post() {
+      return this.$store.getters['posts/currentPost'];
     },
   },
+  methods: {
+  },
   beforeMount() {
-    this.fetchPost(this.postId);
+    this.$store.dispatch('posts/fetchCurrentPost', this.postId);
   },
 };
 </script>

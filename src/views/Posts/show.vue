@@ -32,6 +32,11 @@ export default {
   beforeMount() {
     this.$store.dispatch('posts/fetchCurrentPost', this.postId);
   },
+  watch: {
+    post() {
+      this.$title(this.post.title);
+    },
+  },
 };
 </script>
 

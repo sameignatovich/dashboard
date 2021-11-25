@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build;tar Jcvf dist.tar.xz dist",
+    "build": "vue-cli-service build; tar Jcvf dist.tar.xz dist",
+    "deploy": "scp dist.tar.xz nginx@vm1:/home/nginx/www/dashboard.big.wtf/; ssh -t nginx@vm1 'cd /home/nginx/www/dashboard.big.wtf; tar xvf dist.tar.xz; rm -rf dist.tar.xz public; mv dist public'",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

@@ -29,8 +29,6 @@ export default {
       return this.$store.getters['posts/currentPost'];
     },
   },
-  methods: {
-  },
   beforeMount() {
     this.$store.dispatch('posts/fetchCurrentPost', this.postId);
   },

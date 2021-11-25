@@ -41,7 +41,7 @@ export default {
     maxVisiblePages: {
       type: Number,
       required: false,
-      default: 5,
+      default: 3,
     },
     totalPages: {
       type: Number,

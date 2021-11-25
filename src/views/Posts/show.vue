@@ -1,18 +1,16 @@
 <template>
-  <div class='container'>
-    <div class="shadow-lg p-3 mt-3 bg-body rounded">
-      <h2>
-        {{ post.title }}
-      </h2>
-      <p>
-        <small>
-          wrote by user
-          <router-link :to="`/users/${post.user_id}`">{{ post.user_id }}</router-link>
-        </small>
-      </p>
-      <div class='post-body'>
-        {{ post.text }}
-      </div>
+  <div class="shadow-lg p-3 bg-body rounded">
+    <h2>
+      {{ post.title }}
+    </h2>
+    <p>
+      <small>
+        wrote by user
+        <router-link :to="`/users/${post.user_id}`">{{ post.user_id }}</router-link>
+      </small>
+    </p>
+    <div class='post-body'>
+      {{ post.text }}
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="row row-cols-auto">
+  <div class="row row-cols-auto d-flex justify-content-center">
     <div class="col">
       <Pagination :total-pages="totalPages"
                   :current-page="currentPage"

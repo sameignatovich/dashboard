@@ -31,8 +31,11 @@
               </router-link>
             </td>
             <td>
-              <button @click="deleteUser(user.id)"
-                      class='btn bnt-sm btn-danger'>
+              <button type="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteUser"
+                      @click="userForDeletion = user"
+                      class="btn bnt-sm btn-danger">
                 <i class="bi bi-x-lg"></i>
               </button>
             </td>
@@ -41,6 +44,17 @@
       </tbody>
     </table>
   </div>
+
+  <modal-dialogue title='Remove user?'
+                  body='You sure want to delete this user?
+                        All content of this user also will be affected'
+                  :itemName='userForDeletion.username'
+                  acceptButton='Delete'
+                  acceptButtonClass='btn-danger'
+                  @accept-event="deleteUser(userForDeletion.id)"
+                  @cancel-event="userForDeletion = {}"
+                  id="deleteUser">
+  </modal-dialogue>
 </template>
 
 <script>
@@ -51,6 +65,7 @@ export default {
     return {
       page: 1,
       perPage: 10,
+      userForDeletion: {},
     };
   },
   computed: {

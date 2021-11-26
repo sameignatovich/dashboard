@@ -1,4 +1,12 @@
 <template>
+ <h5 class="display-5 text-center">List of users</h5>
+  <TableHeader  :item-name="`users`"
+                :table-items="users"
+                :total-items-count="usersCount"
+                :items-per-page="perPage"
+                :current-page="page"
+                @change-page="changePage"
+                @change-per-page-count="changePerPageCount" />
   <div class='table-responsive'>
     <table class='table table-striped table-hover caption-top'>
       <thead class="table-dark">
@@ -10,7 +18,6 @@
           <th scope="col"></th>
         </tr>
       </thead>
-      <caption>List of users</caption>
       <tbody>
         <transition-group name="user">
           <tr v-for='user in users' :key='user.id'>
@@ -37,21 +44,49 @@
 </template>
 
 <script>
+import TableHeader from '@/components/TableHeader.vue';
+
 export default {
+  data() {
+    return {
+      page: 1,
+      perPage: 10,
+    };
+  },
   computed: {
     users() {
       return this.$store.getters['users/users'];
     },
+    usersCount() {
+      return this.$store.getters['users/totalUsersCount'];
+    },
   },
   methods: {
+    fetchUsers() {
+      this.$store.dispatch('users/fetchUsers', {
+        page: this.page,
+        perPage: this.perPage,
+      });
+    },
     deleteUser(userId) {
       this.$store.dispatch('users/deleteUser', userId)
         .then(() => this.$toast.success(`User with id ${userId} deleted`));
     },
+    changePage(page) {
+      this.page = page;
+      this.fetchUsers();
+    },
+    changePerPageCount(count) {
+      this.perPage = count;
+      this.fetchUsers();
+    },
   },
   beforeMount() {
     this.$title('Users');
-    this.$store.dispatch('users/fetchUsers');
+    this.fetchUsers();
+  },
+  components: {
+    TableHeader,
   },
 };
 </script>

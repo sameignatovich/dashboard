@@ -12,9 +12,8 @@
       <thead class="table-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">UserID</th>
+          <th scope="col">Author</th>
           <th scope="col">Title</th>
-          <th scope="col"></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -22,12 +21,14 @@
         <transition-group name="post">
           <tr v-for='post in posts' :key='post.id' class='post-item'>
             <th scope="row">{{ post.id }}</th>
-            <td>{{ post.user_id }}</td>
-            <td>{{ post.title }}</td>
             <td>
-              <router-link  :to="`/posts/${post.id}`"
-                            class="btn bnt-sm btn-primary">
-                <i class="bi bi-eye-fill"></i>
+              <router-link :to="`/users/${post.author.user_id}`">
+                {{ post.author.username }}
+              </router-link>
+            </td>
+            <td>
+              <router-link  :to="`/posts/${post.id}`">
+                {{ post.title }}
               </router-link>
             </td>
             <td>

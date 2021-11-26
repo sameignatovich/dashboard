@@ -26,13 +26,16 @@
             <td>{{ post.title }}</td>
             <td>
               <router-link  :to="`/posts/${post.id}`"
-                            class='btn bnt-sm btn-primary'>
+                            class="btn bnt-sm btn-primary">
                 <i class="bi bi-eye-fill"></i>
               </router-link>
             </td>
             <td>
-              <button @click="deletePost(post.id)"
-                      class='btn bnt-sm btn-danger'>
+              <button type="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deletePost"
+                      @click="postForDeletion = post"
+                      class="btn bnt-sm btn-danger">
                 <i class="bi bi-x-lg"></i>
               </button>
             </td>
@@ -41,6 +44,16 @@
       </tbody>
     </table>
   </div>
+
+  <modal-dialogue title='Remove post?'
+                  body='You sure want to delete this post'
+                  :itemName='postForDeletion.title'
+                  acceptButton='Delete'
+                  acceptButtonClass='btn-danger'
+                  @accept-event="deletePost(postForDeletion.id)"
+                  @cancel-event="postForDeletion = {}"
+                  id="deletePost">
+  </modal-dialogue>
 </template>
 
 <script>
@@ -51,6 +64,7 @@ export default {
     return {
       page: 1,
       perPage: 10,
+      postForDeletion: {},
     };
   },
   computed: {

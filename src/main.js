@@ -1,4 +1,6 @@
 import { createApp } from 'vue';
+
+// Plugins
 import Toaster from '@meforma/vue-toaster';
 import VueAxios from 'vue-axios';
 import axios from './plugins/axios';
@@ -8,7 +10,13 @@ import router from './router';
 import store from './store';
 import PageTitle from './plugins/PageTitle';
 
+// Components
+import ModalDialogue from './components/ModalDialogue.vue';
+
+// Frameworks assets
 import 'bootstrap';
+
+// Global styles
 import '@/assets/styles/app.scss';
 
 createApp(App)
@@ -23,4 +31,5 @@ createApp(App)
   .use(PageTitle, {
     titleSuffix: 'Simple Dashboard',
   })
+  .component('modal-dialogue', ModalDialogue)
   .mount('#app');

@@ -1,15 +1,15 @@
 <template>
   <div class="row row-cols-auto d-flex justify-content-center">
     <div class="col">
-      <Pagination :total-pages="totalPages"
+      <TableHeaderPagination :total-pages="totalPages"
                   :current-page="currentPage"
                   @change-page="changePage" />
     </div>
     <div class="col">
-      <SelectItemsCount @change-per-page-count="changePerPageCount" />
+      <TableHeaderSelectItemsCount @change-per-page-count="changePerPageCount" />
     </div>
     <div class="col">
-      <ItemsCounter :counting-items="itemName"
+      <TableHeaderItemsCounter :counting-items="itemName"
                     :items-counter="totalItemsCount"
                     class="mt-2" />
     </div>
@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import Pagination from '@/components/Pagination.vue';
-import SelectItemsCount from '@/components/SelectItemsCount.vue';
-import ItemsCounter from '@/components/ItemsCounter.vue';
+import TableHeaderPagination from '@/components/TableHeaderPagination.vue';
+import TableHeaderSelectItemsCount from '@/components/TableHeaderSelectItemsCount.vue';
+import TableHeaderItemsCounter from '@/components/TableHeaderItemsCounter.vue';
 
 export default {
   props: {
@@ -59,9 +59,9 @@ export default {
     },
   },
   components: {
-    Pagination,
-    SelectItemsCount,
-    ItemsCounter,
+    TableHeaderPagination,
+    TableHeaderSelectItemsCount,
+    TableHeaderItemsCounter,
   },
 };
 </script>

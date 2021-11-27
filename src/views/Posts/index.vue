@@ -1,5 +1,5 @@
 <template>
-  <h5 class="display-5 text-center">List of posts</h5>
+  <h5 class="display-5 text-center">Posts</h5>
   <TableHeader  :item-name="`posts`"
                 :table-items="posts"
                 :total-items-count="postsCount"

@@ -1,5 +1,5 @@
 <template>
- <h5 class="display-5 text-center">List of users</h5>
+ <h5 class="display-5 text-center">Users</h5>
   <TableHeader  :item-name="`users`"
                 :table-items="users"
                 :total-items-count="usersCount"

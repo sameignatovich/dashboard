@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="col-md-9">
-      <h5 class="display-5 text-center">User's posts</h5>
+      <h5 class="display-5 text-center">Posts</h5>
       <table class="table">
         <tbody>
           <tr v-for="post in posts"
@@ -42,28 +42,18 @@
 export default {
   data() {
     return {
-      user: '',
-      posts: '',
+      posts: [],
     };
   },
   computed: {
     userId() {
       return this.$route.params.id;
     },
+    user() {
+      return this.$store.getters['users/currentUser'];
+    },
   },
   methods: {
-    fetchUser(userId) {
-      return new Promise((resolve, reject) => {
-        this.$http.get(`/users/${userId}`)
-          .then((response) => {
-            this.user = response.data;
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
-    },
     fetchUserPosts(userId) {
       return new Promise((resolve, reject) => {
         this.$http.get(`/users/${userId}/posts`)
@@ -78,11 +68,11 @@ export default {
     },
   },
   beforeMount() {
-    this.fetchUser(this.userId);
+    this.$store.dispatch('users/fetchCurrentUser', this.userId);
     this.fetchUserPosts(this.userId);
   },
   watch: {
-    user() {
+    post() {
       this.$title(`@${this.user.username}`);
     },
   },

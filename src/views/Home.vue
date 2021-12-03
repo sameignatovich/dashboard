@@ -66,8 +66,8 @@ export default {
     this.$store.dispatch('info/fetchInfo');
   },
   methods: {
-    formatDate(input) {
-      return dateFormat(input, 'hh:MM dd.mm.yyyy');
+    formatDate(value) {
+      return dateFormat(value, 'hh:MM dd.mm.yyyy');
     },
   },
 };

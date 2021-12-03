@@ -12,6 +12,7 @@
       <thead class="table-dark">
         <tr>
           <th scope="col">#</th>
+          <th></th>
           <th scope="col">Username</th>
           <th scope="col"></th>
         </tr>
@@ -20,6 +21,11 @@
         <transition-group name="user">
           <tr v-for='user in users' :key='user.id'>
             <th scope="row">{{ user.id }}</th>
+            <td>
+              <img  :src="user.avatar"
+                    height="41.5"
+                    class="rounded-circle" />
+            </td>
             <td>
               <router-link :to="`/users/${user.id}`">
                 {{ user.username }}

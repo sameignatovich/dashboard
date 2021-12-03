@@ -6,7 +6,13 @@ const postsModule = {
   state() {
     return {
       posts: [],
-      currentPost: {},
+      currentPost: {
+        id: undefined,
+        title: undefined,
+        text: undefined,
+        created_at: undefined,
+        updated_at: undefined,
+      },
       totalPostsCount: 0,
     };
   },

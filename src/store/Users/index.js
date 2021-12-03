@@ -6,7 +6,17 @@ const usersModule = {
   state() {
     return {
       users: [],
-      currentUser: {},
+      currentUser: {
+        id: undefined,
+        username: undefined,
+        email: undefined,
+        phone: undefined,
+        first_name: undefined,
+        last_name: undefined,
+        address: undefined,
+        created_at: undefined,
+        updated_at: undefined,
+      },
       totalUsersCount: 0,
     };
   },

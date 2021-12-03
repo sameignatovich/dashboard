@@ -2,16 +2,19 @@
   <div class="row">
     <div class="col-md-3">
       <div v-if="user" class="card">
-        <img :src="`https://via.placeholder.com/600?text=User+Avatar+${user.id}`" class="card-img-top" alt="Avatar">
+        <img :src="user.avatar" class="card-img-top" alt="Avatar">
         <div class="card-info m-2">
           <div class="text-center">
-            <strong>{{ user.first_name }} {{ user.last_name }}</strong> |
+            <strong>{{ userFullName }}</strong> |
             <i>@{{ user.username }}</i>
           </div>
           <hr/>
           <p><b>Email:</b> {{ user.email }}</p>
           <p><b>Phone:</b> {{ user.phone }}</p>
           <p><b>Address:</b> {{ user.address }}</p>
+          <hr/>
+          <p><b>Updated:</b> {{ formatDate(user.updated_at) }}</p>
+          <p><b>Created:</b> {{ formatDate(user.created_at) }}</p>
         </div>
       </div>
     </div>
@@ -39,6 +42,8 @@
 </template>
 
 <script>
+import dateFormat from 'dateformat';
+
 export default {
   data() {
     return {
@@ -51,6 +56,9 @@ export default {
     },
     user() {
       return this.$store.getters['users/currentUser'];
+    },
+    userFullName() {
+      return `${this.user.first_name} ${this.user.last_name}`;
     },
   },
   methods: {
@@ -66,13 +74,16 @@ export default {
           });
       });
     },
+    formatDate(value) {
+      return dateFormat(value, 'hh:MM dd.mm.yyyy');
+    },
   },
   beforeMount() {
     this.$store.dispatch('users/fetchCurrentUser', this.userId);
     this.fetchUserPosts(this.userId);
   },
   watch: {
-    post() {
+    user() {
       this.$title(`@${this.user.username}`);
     },
   },

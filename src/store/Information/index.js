@@ -14,6 +14,10 @@ const informationModule = {
           posts_count: '',
           last_post: {},
         },
+        comments: {
+          comments_count: '',
+          last_comment: {},
+        },
       },
     };
   },

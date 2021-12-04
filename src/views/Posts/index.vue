@@ -109,7 +109,7 @@ export default {
 <style scoped lang='scss'>
 .post-enter-active,
 .post-leave-active {
-  transition: all 1s ease;
+  transition: all .5s ease;
 }
 .post-enter-from,
 .post-leave-to {

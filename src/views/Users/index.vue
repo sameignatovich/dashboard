@@ -110,7 +110,7 @@ export default {
 <style scoped lang='scss'>
 .user-enter-active,
 .user-leave-active {
-  transition: all 1s ease;
+  transition: all .5s ease;
 }
 .user-enter-from,
 .user-leave-to {

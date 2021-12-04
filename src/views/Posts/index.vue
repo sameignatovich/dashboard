@@ -63,29 +63,46 @@ import TableHeader from '@/components/TableHeader.vue';
 export default {
   data() {
     return {
+      posts: [],
+      postsCount: undefined,
       page: 1,
       perPage: 10,
       postForDeletion: {},
     };
   },
-  computed: {
-    posts() {
-      return this.$store.getters['posts/posts'];
-    },
-    postsCount() {
-      return this.$store.getters['posts/totalPostsCount'];
-    },
-  },
   methods: {
     fetchPosts() {
-      this.$store.dispatch('posts/fetchPosts', {
-        page: this.page,
-        perPage: this.perPage,
+      return new Promise((resolve, reject) => {
+        this.$http.get('/posts', {
+          params: {
+            page: this.page,
+            perPage: this.perPage,
+          },
+        })
+          .then((response) => {
+            this.posts = response.data.posts;
+            this.postsCount = response.data.totalPostsCount;
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
       });
     },
     deletePost(postId) {
-      this.$store.dispatch('posts/deletePost', postId)
-        .then(() => this.$toast.success(`Post with id ${postId} deleted`));
+      return new Promise((resolve, reject) => {
+        this.$http.delete(`/posts/${postId}`)
+          .then((response) => {
+            this.posts.splice(this.posts.findIndex((i) => i.id === postId), 1);
+            this.totalPostsCount -= 1;
+
+            this.$toast.success(`Post with id ${postId} deleted`);
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
     },
     changePage(page) {
       this.page = page;

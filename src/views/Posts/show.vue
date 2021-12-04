@@ -3,41 +3,23 @@
     <h2>
       {{ post.title }}
     </h2>
-    <p>
-      <small>
-        wrote by
-        <router-link :to="`/users/${post.author.user_id}`">{{ post.author.username }}</router-link>
-      </small>
+    <p class="fw-normal">
+      wrote by
+      <router-link :to="`/users/${post.author.user_id}`">{{ post.author.username }}</router-link>
+      <span class="fw-light ms-1">
+        {{ formatDate(post.created_at, '"at" HH:MM dd.mm.yyyy') }}
+      </span>
     </p>
     <div class='post-body'>
       {{ post.text }}
     </div>
   </div>
-  <div class="shadow-lg p-3 bg-body rounded mb-3">
-    <h4>Comments</h4>
-    <div  v-for="comment in comments"
-          :key="comment.id"
-          class="m-1 p-1 border-start border-3 border-dark">
-      <div class="comment-header">
-        <router-link :to="`/users/${comment.author.user_id}`" class="fw-bold me-1">
-          <img  :src='comment.author.avatar'
-                class="rounded-circle"
-                height="32" />
-          {{ comment.author.username }}
-        </router-link>
-        <span class="fw-light">
-          {{ formatDate(comment.created_at) }}
-        </span>
-      </div>
-      <div class="comment-body fw-normal">
-        {{ comment.body }}
-      </div>
-    </div>
-  </div>
+  <comments :comments="comments" />
 </template>
 
 <script>
 import dateFormat from 'dateformat';
+import Comments from '@/components/Comments.vue';
 
 export default {
   computed: {
@@ -55,8 +37,8 @@ export default {
     this.$store.dispatch('posts/fetchCurrentPost', this.postId);
   },
   methods: {
-    formatDate(value) {
-      return dateFormat(value, 'dd.mm.yyyy "at" HH:MM');
+    formatDate(value, format) {
+      return dateFormat(value, format);
     },
   },
   watch: {
@@ -64,11 +46,11 @@ export default {
       this.$title(this.post.title);
     },
   },
+  components: {
+    Comments,
+  },
 };
 </script>
 
 <style scoped lang='scss'>
-  a {
-    text-decoration: none;
-  }
 </style>

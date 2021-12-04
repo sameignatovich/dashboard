@@ -75,7 +75,7 @@ export default {
       });
     },
     formatDate(value) {
-      return dateFormat(value, 'hh:MM dd.mm.yyyy');
+      return dateFormat(value, 'HH:MM dd.mm.yyyy');
     },
   },
   beforeMount() {

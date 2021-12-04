@@ -19,7 +19,7 @@
             <div class="col-md-4">
               <b>Last user</b>
               <br/>
-              {{ fullname }}
+              {{ info.users.last_user.username }}
               <br/>
               ({{ formatDate(info.users.last_user.created_at) }})
             </div>
@@ -44,6 +44,25 @@
             </div>
           </div>
         </div>
+        <div class="shadow-lg p-3 mb-3 bg-body rounded">
+          <div class="row align-items-center">
+            <div class="col-md-4">
+              <i class="bi bi-chat-left-text-fill"></i>
+            </div>
+            <div class="col-md-4">
+              <b>Comments count</b>
+              <br/>
+              {{ info.comments.comments_count }}
+            </div>
+            <div class="col-md-4">
+              <b>Last comment</b>
+              <br/>
+              {{ info.comments.last_comment.body }}
+              <br/>
+              ({{ formatDate(info.comments.last_comment.created_at) }})
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -57,9 +76,6 @@ export default {
     info() {
       return this.$store.getters['info/info'];
     },
-    fullname() {
-      return `${this.info.users.last_user.first_name} ${this.info.users.last_user.last_name}`;
-    },
   },
   beforeMount() {
     this.$title('Home');
@@ -67,7 +83,7 @@ export default {
   },
   methods: {
     formatDate(value) {
-      return dateFormat(value, 'hh:MM dd.mm.yyyy');
+      return dateFormat(value, 'HH:MM dd.mm.yyyy');
     },
   },
 };

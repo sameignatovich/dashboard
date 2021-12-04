@@ -17,7 +17,6 @@ const postsModule = {
           username: undefined,
         },
       },
-      currentPostComments: [],
       totalPostsCount: 0,
     };
   },
@@ -27,9 +26,6 @@ const postsModule = {
     },
     SET_CURRENT_POST(state, post) {
       state.currentPost = post;
-    },
-    SET_CURRENT_POST_COMMENTS(state, comments) {
-      state.currentPostComments = comments;
     },
     SET_TOTAL_POSTS_COUNT(state, count) {
       state.totalPostsCount = count;
@@ -61,8 +57,7 @@ const postsModule = {
       return new Promise((resolve, reject) => {
         axios.get(`/posts/${postId}`)
           .then((response) => {
-            commit('SET_CURRENT_POST', response.data.post);
-            commit('SET_CURRENT_POST_COMMENTS', response.data.comments);
+            commit('SET_CURRENT_POST', response.data);
             resolve(response);
           })
           .catch((error) => {

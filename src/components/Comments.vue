@@ -7,7 +7,7 @@
       <div class="comment-header">
         <router-link :to="`/users/${comment.author.user_id}`" class="fw-bold me-1">
           <img  :src='comment.author.avatar'
-                class="rounded-circle"
+                class="rounded"
                 height="32" />
           {{ comment.author.username }}
         </router-link>
@@ -26,16 +26,36 @@
 import dateFormat from 'dateformat';
 
 export default {
+  data() {
+    return {
+      comments: [],
+    };
+  },
   props: {
-    comments: {
-      type: Object,
+    postId: {
+      type: Number,
       required: true,
     },
   },
   methods: {
+    fetchComments(postId) {
+      return new Promise((resolve, reject) => {
+        this.$http.get(`/posts/${postId}/comments`)
+          .then((response) => {
+            this.comments = response.data;
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
     formatDate(value, format) {
       return dateFormat(value, format);
     },
+  },
+  beforeMount() {
+    this.fetchComments(this.postId);
   },
 };
 </script>

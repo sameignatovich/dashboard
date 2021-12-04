@@ -64,29 +64,44 @@ import TableHeader from '@/components/TableHeader.vue';
 export default {
   data() {
     return {
+      users: [],
+      usersCount: undefined,
       page: 1,
       perPage: 10,
       userForDeletion: {},
     };
   },
-  computed: {
-    users() {
-      return this.$store.getters['users/users'];
-    },
-    usersCount() {
-      return this.$store.getters['users/totalUsersCount'];
-    },
-  },
   methods: {
     fetchUsers() {
-      this.$store.dispatch('users/fetchUsers', {
-        page: this.page,
-        perPage: this.perPage,
+      return new Promise((resolve, reject) => {
+        this.$http.get('/users', {
+          params: {
+            page: this.page,
+            perPage: this.perPage,
+          },
+        })
+          .then((response) => {
+            this.users = response.data.users;
+            this.usersCount = response.data.totalUsersCount;
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
       });
     },
     deleteUser(userId) {
-      this.$store.dispatch('users/deleteUser', userId)
-        .then(() => this.$toast.success(`User with id ${userId} deleted`));
+      return new Promise((resolve, reject) => {
+        this.$http.delete(`/users/${userId}`)
+          .then((response) => {
+            this.users.splice(this.users.findIndex((i) => i.id === userId), 1);
+            this.$toast.success(`User with id ${userId} deleted`);
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
     },
     changePage(page) {
       this.page = page;

@@ -47,6 +47,7 @@ import dateFormat from 'dateformat';
 export default {
   data() {
     return {
+      user: {},
       posts: [],
     };
   },
@@ -54,14 +55,23 @@ export default {
     userId() {
       return this.$route.params.id;
     },
-    user() {
-      return this.$store.getters['users/currentUser'];
-    },
     userFullName() {
       return `${this.user.first_name} ${this.user.last_name}`;
     },
   },
   methods: {
+    fetchUser(userId) {
+      return new Promise((resolve, reject) => {
+        this.$http.get(`/users/${userId}`)
+          .then((response) => {
+            this.user = response.data;
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
     fetchUserPosts(userId) {
       return new Promise((resolve, reject) => {
         this.$http.get(`/users/${userId}/posts`)
@@ -79,7 +89,7 @@ export default {
     },
   },
   beforeMount() {
-    this.$store.dispatch('users/fetchCurrentUser', this.userId);
+    this.fetchUser(this.userId);
     this.fetchUserPosts(this.userId);
   },
   watch: {

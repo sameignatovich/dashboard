@@ -6,26 +6,12 @@ const postsModule = {
   state() {
     return {
       posts: [],
-      currentPost: {
-        id: undefined,
-        title: undefined,
-        text: undefined,
-        created_at: undefined,
-        updated_at: undefined,
-        author: {
-          user_id: undefined,
-          username: undefined,
-        },
-      },
       totalPostsCount: 0,
     };
   },
   mutations: {
     SET_POSTS(state, posts) {
       state.posts = posts;
-    },
-    SET_CURRENT_POST(state, post) {
-      state.currentPost = post;
     },
     SET_TOTAL_POSTS_COUNT(state, count) {
       state.totalPostsCount = count;
@@ -53,18 +39,6 @@ const postsModule = {
           });
       });
     },
-    fetchCurrentPost({ commit }, postId) {
-      return new Promise((resolve, reject) => {
-        axios.get(`/posts/${postId}`)
-          .then((response) => {
-            commit('SET_CURRENT_POST', response.data);
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
-    },
     deletePost({ commit, state }, postId) {
       return new Promise((resolve, reject) => {
         axios.delete(`/posts/${postId}`)
@@ -81,8 +55,6 @@ const postsModule = {
   },
   getters: {
     posts: (state) => state.posts,
-    currentPost: (state) => state.currentPost,
-    currentPostComments: (state) => state.currentPostComments,
     totalPostsCount: (state) => state.totalPostsCount,
   },
 };

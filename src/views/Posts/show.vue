@@ -10,7 +10,9 @@ import Comments from '@/components/Comments.vue';
 export default {
   data() {
     return {
-      post: undefined,
+      post: {
+        author: {},
+      },
     };
   },
   computed: {

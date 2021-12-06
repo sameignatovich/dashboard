@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       posts: [],
-      postsCount: undefined,
+      postsCount: 0,
       page: 1,
       perPage: 10,
       postForDeletion: {},

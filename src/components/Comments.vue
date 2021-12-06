@@ -31,7 +31,7 @@ export default {
   },
   props: {
     postId: {
-      type: Number,
+      type: String,
       required: true,
     },
   },

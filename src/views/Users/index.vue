@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       users: [],
-      usersCount: undefined,
+      usersCount: 0,
       page: 1,
       perPage: 10,
       userForDeletion: {},

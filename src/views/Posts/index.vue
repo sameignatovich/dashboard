@@ -1,6 +1,6 @@
 <template>
   <h5 class="display-5 text-center">Posts</h5>
-  <TableHeader  :item-name="`posts`"
+  <table-header  :item-name="`posts`"
                 :table-items="posts"
                 :total-items-count="postsCount"
                 :items-per-page="perPage"
@@ -11,25 +11,31 @@
     <table class='table table-striped table-hover caption-top'>
       <thead class="table-dark">
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Author</th>
           <th scope="col">Title</th>
+          <th scope="col">Published</th>
+          <th scope="col">Author</th>
+          <th scope="col">Comments</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <transition-group name="post">
           <tr v-for='post in posts' :key='post.id' class='post-item'>
-            <th scope="row">{{ post.id }}</th>
+            <td>
+              <router-link  :to="`/posts/${post.id}`">
+                {{ post.title }}
+              </router-link>
+            </td>
+            <td>
+              {{ $formatdate(post.created_at) }}
+            </td>
             <td>
               <router-link :to="`/users/${post.author.user_id}`">
                 {{ post.author.username }}
               </router-link>
             </td>
             <td>
-              <router-link  :to="`/posts/${post.id}`">
-                {{ post.title }}
-              </router-link>
+              {{ post.comments_count }}
             </td>
             <td>
               <button type="button"

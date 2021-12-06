@@ -12,7 +12,7 @@
           {{ comment.author.username }}
         </router-link>
         <span class="fw-light">
-          {{ formatDate(comment.created_at, 'dd.mm.yyyy "at" HH:MM') }}
+          {{ $formatdate(comment.created_at, 'dd.mm.yyyy "at" HH:MM') }}
         </span>
       </div>
       <div class="comment-body fw-normal">
@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import dateFormat from 'dateformat';
-
 export default {
   data() {
     return {
@@ -49,9 +47,6 @@ export default {
             reject(error);
           });
       });
-    },
-    formatDate(value, format) {
-      return dateFormat(value, format);
     },
   },
   beforeMount() {

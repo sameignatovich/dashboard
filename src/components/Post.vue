@@ -7,7 +7,7 @@
       wrote by
       <router-link :to="`/users/${post.author.user_id}`">{{ post.author.username }}</router-link>
       <span class="fw-light ms-1">
-        {{ formatDate(post.created_at, '"at" HH:MM dd.mm.yyyy') }}
+        {{ $formatdate(post.created_at, '"at" HH:MM dd.mm.yyyy') }}
       </span>
     </p>
     <div class='post-body'>
@@ -17,18 +17,11 @@
 </template>
 
 <script>
-import dateFormat from 'dateformat';
-
 export default {
   props: {
     post: {
       type: Object,
       required: true,
-    },
-  },
-  methods: {
-    formatDate(value, format) {
-      return dateFormat(value, format);
     },
   },
 };

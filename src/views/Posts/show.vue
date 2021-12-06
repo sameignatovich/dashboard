@@ -4,7 +4,6 @@
 </template>
 
 <script>
-import dateFormat from 'dateformat';
 import Post from '@/components/Post.vue';
 import Comments from '@/components/Comments.vue';
 
@@ -23,9 +22,6 @@ export default {
     this.fetchPost(this.postId);
   },
   methods: {
-    formatDate(value, format) {
-      return dateFormat(value, format);
-    },
     fetchPost(postId) {
       return new Promise((resolve, reject) => {
         this.$http.get(`/posts/${postId}`)

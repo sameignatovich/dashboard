@@ -13,8 +13,14 @@
           <p><b>Phone:</b> {{ user.phone }}</p>
           <p><b>Address:</b> {{ user.address }}</p>
           <hr/>
-          <p><b>Updated:</b> {{ formatDate(user.updated_at) }}</p>
-          <p><b>Created:</b> {{ formatDate(user.created_at) }}</p>
+          <p>
+            <b>Updated:</b>
+            {{ $formatdate(user.updated_at, 'HH:MM dd.mm.yyyy') }}
+          </p>
+          <p>
+            <b>Created:</b>
+            {{ $formatdate(user.created_at, 'HH:MM dd.mm.yyyy') }}
+          </p>
         </div>
       </div>
     </div>
@@ -42,8 +48,6 @@
 </template>
 
 <script>
-import dateFormat from 'dateformat';
-
 export default {
   data() {
     return {
@@ -83,9 +87,6 @@ export default {
             reject(error);
           });
       });
-    },
-    formatDate(value) {
-      return dateFormat(value, 'HH:MM dd.mm.yyyy');
     },
   },
   beforeMount() {

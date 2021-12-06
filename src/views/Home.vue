@@ -21,7 +21,7 @@
               <br/>
               {{ info.users.last_user.username }}
               <br/>
-              ({{ formatDate(info.users.last_user.created_at) }})
+              ({{ $formatdate(info.users.last_user.created_at, 'HH:MM dd.mm.yyyy') }})
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@
               <br/>
               {{ info.posts.last_post.title }}
               <br/>
-              ({{ formatDate(info.posts.last_post.created_at) }})
+              ({{ $formatdate(info.posts.last_post.created_at, 'HH:MM dd.mm.yyyy') }})
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@
               <br/>
               {{ info.comments.last_comment.body }}
               <br/>
-              ({{ formatDate(info.comments.last_comment.created_at) }})
+              ({{ $formatdate(info.comments.last_comment.created_at, 'HH:MM dd.mm.yyyy') }})
             </div>
           </div>
         </div>
@@ -69,8 +69,6 @@
 </template>
 
 <script>
-import dateFormat from 'dateformat';
-
 export default {
   computed: {
     info() {
@@ -80,11 +78,6 @@ export default {
   beforeMount() {
     this.$title('Home');
     this.$store.dispatch('info/fetchInfo');
-  },
-  methods: {
-    formatDate(value) {
-      return dateFormat(value, 'HH:MM dd.mm.yyyy');
-    },
   },
 };
 </script>

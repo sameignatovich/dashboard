@@ -11,16 +11,17 @@
     <table class='table table-striped table-hover caption-top'>
       <thead class="table-dark">
         <tr>
-          <th scope="col">#</th>
           <th></th>
           <th scope="col">Username</th>
+          <th scope="col">Posts</th>
+          <th scope="col">Comments</th>
+          <th scope="col">Created at</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <transition-group name="user">
           <tr v-for='user in users' :key='user.id'>
-            <th scope="row">{{ user.id }}</th>
             <td>
               <img  :src="user.avatar"
                     height="41.5"
@@ -30,6 +31,15 @@
               <router-link :to="`/users/${user.id}`">
                 {{ user.username }}
               </router-link>
+            </td>
+            <td>
+              {{ user.posts_count }}
+            </td>
+            <td>
+              {{ user.comments_count }}
+            </td>
+            <td>
+              {{ $formatdate(user.created_at, 'HH:MM dd.mm.yyyy') }}
             </td>
             <td>
               <button type="button"

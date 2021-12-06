@@ -1,16 +1,16 @@
 <template>
-  <Navigation class="mb-3"/>
+  <navbar class="mb-3"/>
   <div class="container">
     <router-view/>
   </div>
 </template>
 
 <script>
-import Navigation from '@/components/Navigation.vue';
+import Navbar from '@/components/Navbar.vue';
 
 export default {
   components: {
-    Navigation,
+    Navbar,
   },
 };
 </script>

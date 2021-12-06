@@ -9,6 +9,7 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import PageTitle from './plugins/PageTitle';
+import FormatDate from './plugins/FormatDate';
 
 // Components
 import ModalDialogue from './components/ModalDialogue.vue';
@@ -31,5 +32,6 @@ createApp(App)
   .use(PageTitle, {
     titleSuffix: 'Simple Dashboard',
   })
+  .use(FormatDate)
   .component('modal-dialogue', ModalDialogue)
   .mount('#app');

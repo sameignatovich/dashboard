@@ -7,9 +7,11 @@
       </router-link>
     </li>
     <li v-else class="nav-item">
-      <router-link to="/signout" class='nav-link'>
+      <button @click="signout"
+              class="btn nav-link">
+        <i class="bi bi-box-arrow-left"></i>
         Sign out
-      </router-link>
+      </button>
     </li>
   </ul>
 </template>
@@ -19,6 +21,14 @@ export default {
   computed: {
     authorized() {
       return this.$store.getters['auth/isAuthorized'];
+    },
+  },
+  methods: {
+    signout() {
+      this.$store.dispatch('auth/signout')
+        .then(() => {
+          this.$router.push('/');
+        });
     },
   },
 };

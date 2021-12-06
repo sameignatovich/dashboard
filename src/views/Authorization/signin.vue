@@ -21,12 +21,14 @@
 
       <button type="submit" class="w-100 btn btn-lg btn-primary">Submit</button>
 
-      <!--<div class="additional-links pt-3 text-start">
+      <!--<
+      div class="additional-links pt-3 text-start">
         <ul>
           <li><router-link to="/signin/reset">Забыли пароль?</router-link></li>
           <li><router-link to="/signup">Регистрация</router-link></li>
         </ul>
-      </div>-->
+      </div>
+    -->
     </form>
   </div>
 </template>
@@ -38,6 +40,11 @@ export default {
       email: '',
       password: '',
     };
+  },
+  computed: {
+    errorMessage() {
+      return this.$store.getters['auth/errorMessage'];
+    },
   },
   methods: {
     signin() {
@@ -55,12 +62,16 @@ export default {
           } else {
             this.$router.push('/');
           }
+          this.$toast.success('Authorization succesfull!');
         })
         .catch(() => {
-          this.$toast.error('Wrong email or password', { position: 'top' });
+          this.$toast.error(this.errorMessage);
           this.password = '';
         });
     },
+  },
+  beforeMount() {
+    this.$title('Signin');
   },
 };
 </script>

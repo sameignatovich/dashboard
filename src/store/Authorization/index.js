@@ -7,6 +7,7 @@ const authorizationModule = {
     return {
       token: null,
       user: {},
+      errorMessage: null,
     };
   },
   mutations: {
@@ -22,6 +23,9 @@ const authorizationModule = {
     },
     SET_USER(state, user) {
       state.user = user;
+    },
+    SET_ERROR(state, errorMessage) {
+      state.errorMessage = errorMessage;
     },
   },
   actions: {
@@ -49,6 +53,7 @@ const authorizationModule = {
             resolve(response);
           })
           .catch((error) => {
+            commit('SET_ERROR', error.response.data.message);
             reject(error);
           });
       });
@@ -73,6 +78,7 @@ const authorizationModule = {
   getters: {
     token: (state) => state.token,
     user: (state) => state.user,
+    errorMessage: (state) => state.errorMessage,
     isAuthorized: (state) => !!state.token,
   },
 };

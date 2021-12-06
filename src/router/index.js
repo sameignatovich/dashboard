@@ -1,18 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Users from './Users/index';
-import Posts from './Posts/index';
+import Authorization from './Authorization';
+import Users from './Users';
+import Posts from './Posts';
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+    component: () => import(/* webpackChunkName: "home" */ '../views/Pages/Home.vue'),
   },
   {
     path: '/about',
     name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/Pages/About.vue'),
   },
+  ...Authorization,
   ...Users,
   ...Posts,
 ];

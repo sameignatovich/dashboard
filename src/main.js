@@ -20,6 +20,13 @@ import 'bootstrap';
 // Global styles
 import '@/assets/styles/app.scss';
 
+// Preload routine
+const token = localStorage.getItem('token');
+if (token) {
+  store.dispatch('auth/autologin', token);
+}
+
+// Application initialization
 createApp(App)
   .use(store)
   .use(router)

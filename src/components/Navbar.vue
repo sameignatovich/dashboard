@@ -38,13 +38,19 @@
             </router-link>
           </li>
         </ul>
+        <navbar-user />
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import NavbarUser from './NavbarUser.vue';
+
 export default {
+  components: {
+    NavbarUser,
+  },
 };
 </script>
 

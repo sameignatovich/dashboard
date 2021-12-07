@@ -5,7 +5,7 @@
         <img :src="user.avatar" class="card-img-top" alt="Avatar">
         <div class="card-info m-2">
           <div class="text-center">
-            <strong>{{ userFullName }}</strong> |
+            <strong>{{ user.full_name }}</strong><br/>
             <i>@{{ user.username }}</i>
           </div>
           <hr/>
@@ -58,9 +58,6 @@ export default {
   computed: {
     userId() {
       return this.$route.params.id;
-    },
-    userFullName() {
-      return `${this.user.first_name} ${this.user.last_name}`;
     },
   },
   methods: {

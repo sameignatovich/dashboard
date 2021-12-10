@@ -9,9 +9,18 @@
             <i>@{{ user.username }}</i>
           </div>
           <hr/>
-          <p><b>Email:</b> {{ user.email }}</p>
-          <p><b>Phone:</b> {{ user.phone }}</p>
-          <p><b>Address:</b> {{ user.address }}</p>
+          <p>
+            <i class="bi bi-envelope-fill"></i>
+            {{ user.email }}
+          </p>
+          <p>
+            <i class="bi bi-telephone-fill"></i>
+            {{ user.phone }}
+          </p>
+          <p>
+            <i class="bi bi-geo-alt-fill"></i>
+            {{ user.address }}
+          </p>
           <hr/>
           <p>
             <b>Updated:</b>

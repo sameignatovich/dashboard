@@ -28,10 +28,6 @@ export default {
       required: false,
       default: 'items',
     },
-    tableItems: {
-      type: Array,
-      required: true,
-    },
     totalItemsCount: {
       type: Number,
       required: false,

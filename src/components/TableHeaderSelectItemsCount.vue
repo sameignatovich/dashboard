@@ -1,16 +1,13 @@
 <template>
-  <div class="input-group">
-    <span class="input-group-text">Count per page</span>
-    <select v-model="count"
-            @change="changeCount($event.target.value)"
-            class="form-select"
-            aria-label=".form-select-sm">
-      <option disabled>Select per-page count</option>
-      <option v-for="number in itemsNumbers" :key='number'>
-        {{ number }}
-      </option>
-    </select>
-  </div>
+  <select v-model="count"
+          @change="changeCount($event.target.value)"
+          class="form-select"
+          aria-label=".form-select-sm">
+    <option disabled>Select per-page count</option>
+    <option v-for="number in itemsNumbers" :key='number'>
+      {{ number }}
+    </option>
+  </select>
 </template>
 
 <script>

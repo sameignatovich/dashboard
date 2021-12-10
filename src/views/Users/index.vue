@@ -1,7 +1,6 @@
 <template>
  <h5 class="display-5 text-center">Users</h5>
   <TableHeader  :item-name="`users`"
-                :table-items="users"
                 :total-items-count="usersCount"
                 :items-per-page="perPage"
                 :current-page="page"

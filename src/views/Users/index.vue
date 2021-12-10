@@ -12,8 +12,7 @@
         <tr>
           <th></th>
           <th scope="col">Username</th>
-          <th scope="col">Posts</th>
-          <th scope="col">Comments</th>
+          <th scope="col">Role</th>
           <th scope="col">Created at</th>
           <th scope="col"></th>
         </tr>
@@ -32,10 +31,7 @@
               </router-link>
             </td>
             <td>
-              {{ user.posts_count }}
-            </td>
-            <td>
-              {{ user.comments_count }}
+              {{ user.role }}
             </td>
             <td>
               {{ $formatdate(user.created_at, 'HH:MM dd.mm.yyyy') }}

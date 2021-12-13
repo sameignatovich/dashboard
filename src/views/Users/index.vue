@@ -6,49 +6,20 @@
                 :current-page="page"
                 @change-page="changePage"
                 @change-per-page-count="changePerPageCount" />
-  <div class='table-responsive'>
-    <table class='table table-striped table-hover caption-top'>
-      <thead class="table-dark">
-        <tr>
-          <th></th>
-          <th scope="col">Username</th>
-          <th scope="col">Role</th>
-          <th scope="col">Created at</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <transition-group name="user">
-          <tr v-for='user in users' :key='user.id'>
-            <td>
-              <img  :src="user.avatar"
-                    height="41.5"
-                    class="rounded-circle" />
-            </td>
-            <td>
-              <router-link :to="`/users/${user.id}`">
-                {{ user.username }}
-              </router-link>
-            </td>
-            <td>
-              {{ user.role }}
-            </td>
-            <td>
-              {{ $formatdate(user.created_at, 'HH:MM dd.mm.yyyy') }}
-            </td>
-            <td>
-              <button type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteUser"
-                      @click="userForDeletion = user"
-                      class="btn bnt-sm btn-danger">
-                <i class="bi bi-x-lg"></i>
-              </button>
-            </td>
-          </tr>
-        </transition-group>
-      </tbody>
-    </table>
+
+  <div class="row
+              row-cols-sm-2
+              row-cols-md-3
+              row-cols-lg-5
+              g-2">
+    <transition-group name="user">
+      <div  v-for="user in users"
+            :key="user.id"
+            class="col"
+            @delete-user="setUserForDeletion(user)" >
+        <users-list-profile :user="user" />
+      </div>
+    </transition-group>
   </div>
 
   <modal-dialogue title='Remove user?'
@@ -65,6 +36,7 @@
 
 <script>
 import TableHeader from '@/components/TableHeader.vue';
+import UsersListProfile from '@/components/UsersListProfile.vue';
 
 export default {
   data() {
@@ -95,6 +67,9 @@ export default {
           });
       });
     },
+    setUserForDeletion(user) {
+      this.userForDeletion = user;
+    },
     deleteUser(userId) {
       return new Promise((resolve, reject) => {
         this.$http.delete(`/users/${userId}`)
@@ -123,6 +98,7 @@ export default {
   },
   components: {
     TableHeader,
+    UsersListProfile,
   },
 };
 </script>

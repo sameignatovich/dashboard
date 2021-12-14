@@ -13,7 +13,7 @@
       </span>
     </div>
     <hr>
-    <span class="placeholder col-4 bg-primary placeholder-wave rounded">
+    <span class="placeholder col-4 bg-secondary placeholder-wave rounded">
     </span>
   </div>
 </template>

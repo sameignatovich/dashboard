@@ -6,12 +6,32 @@
         Sign in
       </router-link>
     </li>
-    <li v-else class="nav-item">
-      <button @click="signout"
-              class="btn nav-link">
-        <i class="bi bi-box-arrow-left"></i>
-        Sign out
-      </button>
+    <li v-else class="nav-item dropdown">
+      <a  href="#"
+          class="nav-link dropdown-toggle"
+          id="navbarDropdown"
+          data-bs-toggle="dropdown"
+          aria-expanded="false" >
+        <img :src="user.avatar" height="30" class="rounded-circle" />
+        {{ user.full_name }}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li>
+          <router-link :to="`/users/${user.id}`"
+                       class="dropdown-item">
+            <i class="bi bi-person-circle"></i>
+            Profile
+          </router-link>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <button @click="signout"
+                  class="dropdown-item">
+            <i class="bi bi-box-arrow-left"></i>
+            Sign out
+          </button>
+        </li>
+      </ul>
     </li>
   </ul>
 </template>
@@ -21,6 +41,9 @@ export default {
   computed: {
     authorized() {
       return this.$store.getters['auth/isAuthorized'];
+    },
+    user() {
+      return this.$store.getters['auth/user'];
     },
   },
   methods: {

@@ -15,9 +15,9 @@
     <transition-group name="user">
       <div  v-for="user in users"
             :key="user.id"
-            class="col"
-            @delete-user="setUserForDeletion(user)" >
-        <users-list-profile :user="user" />
+            class="col">
+        <users-list-profile :user="user"
+                            @delete-user="setUserForDeletion(user)" />
       </div>
     </transition-group>
   </div>
@@ -76,6 +76,7 @@ export default {
           .then((response) => {
             this.users.splice(this.users.findIndex((i) => i.id === userId), 1);
             this.$toast.success(`User with id ${userId} deleted`);
+            this.fetchUsers();
             resolve(response);
           })
           .catch((error) => {

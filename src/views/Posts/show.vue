@@ -1,6 +1,6 @@
 <template>
-  <post :post="post" :loading="loading" />
-  <comments :postId="postId" />
+  <post :post="post" :loading="postLoading" />
+  <comments :comments="comments" :loading="commentsLoading" />
 </template>
 
 <script>
@@ -14,7 +14,9 @@ export default {
         author: {},
         tags: [],
       },
-      loading: true,
+      comments: [],
+      postLoading: true,
+      commentsLoading: true,
     };
   },
   computed: {
@@ -24,6 +26,7 @@ export default {
   },
   beforeMount() {
     this.fetchPost(this.postId);
+    this.fetchComments(this.postId);
   },
   methods: {
     fetchPost(postId) {
@@ -32,11 +35,25 @@ export default {
           .then((response) => {
             this.post = response.data;
             resolve(response);
-            this.loading = false;
+            this.postLoading = false;
           })
           .catch((error) => {
             reject(error);
-            this.loading = false;
+            this.postLoading = false;
+          });
+      });
+    },
+    fetchComments(postId) {
+      return new Promise((resolve, reject) => {
+        this.$http.get(`/posts/${postId}/comments`)
+          .then((response) => {
+            this.comments = response.data;
+            resolve(response);
+            this.commentsLoading = false;
+          })
+          .catch((error) => {
+            reject(error);
+            this.commentsLoading = false;
           });
       });
     },

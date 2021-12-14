@@ -24,33 +24,15 @@
 
 <script>
 export default {
-  data() {
-    return {
-      comments: [],
-    };
-  },
   props: {
-    postId: {
-      type: String,
+    comments: {
+      type: Array,
       required: true,
     },
-  },
-  methods: {
-    fetchComments(postId) {
-      return new Promise((resolve, reject) => {
-        this.$http.get(`/posts/${postId}/comments`)
-          .then((response) => {
-            this.comments = response.data;
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
+    loading: {
+      type: Boolean,
+      required: true,
     },
-  },
-  beforeMount() {
-    this.fetchComments(this.postId);
   },
 };
 </script>

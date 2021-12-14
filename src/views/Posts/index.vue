@@ -1,5 +1,13 @@
 <template>
-  <h5 class="display-5 text-center">Posts</h5>
+  <h5 class="display-5 text-center">
+    Posts
+    <span v-if="$route.query.username">
+      {{ `of user ${$route.query.username}` }}
+    </span>
+        <span v-if="$route.query.tag">
+      {{ `with tag #${$route.query.tag}` }}
+    </span>
+  </h5>
   <table-header  :item-name="`posts`"
                 :table-items="posts"
                 :total-items-count="postsCount"
@@ -57,10 +65,10 @@ export default {
       posts: [],
       postsCount: 0,
       query_params: {
-        page: 1,
-        perPage: 10,
-        tag: null,
-        user_id: null,
+        page: +this.$route.query.page || 1,
+        perPage: +this.$route.query.perPage || 10,
+        username: this.$route.query.username,
+        tag: this.$route.query.tag,
       },
       postForDeletion: {},
     };
@@ -68,14 +76,7 @@ export default {
   methods: {
     fetchPosts() {
       return new Promise((resolve, reject) => {
-        this.$http.get('/posts', {
-          params: {
-            page: this.query_params.page,
-            perPage: this.query_params.perPage,
-            tag: this.query_params.tag,
-            user_id: this.query_params.user_id,
-          },
-        })
+        this.$http.get('/posts', { params: this.query_params })
           .then((response) => {
             this.posts = response.data.posts;
             this.postsCount = response.data.totalPostsCount;
@@ -92,8 +93,8 @@ export default {
           .then((response) => {
             this.posts.splice(this.posts.findIndex((i) => i.id === postId), 1);
             this.postsCount -= 1;
-
             this.$toast.success(`Post with id ${postId} deleted`);
+            this.fetchPosts();
             resolve(response);
           })
           .catch((error) => {
@@ -103,12 +104,13 @@ export default {
     },
     changePage(page) {
       this.query_params.page = page;
-      this.$route.query.page = page;
+      this.$router.push({ path: '/posts', query: this.query_params });
       this.fetchPosts();
     },
     changePerPageCount(count) {
       this.query_params.perPage = count;
       this.query_params.page = 1;
+      this.$router.push({ path: '/posts', query: this.query_params });
       this.fetchPosts();
     },
   },

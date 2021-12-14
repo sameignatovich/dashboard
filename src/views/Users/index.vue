@@ -8,7 +8,7 @@
                 @change-per-page-count="changePerPageCount" />
 
   <div class="row
-              row-cols-sm-2
+              row-cols-sm-1
               row-cols-md-3
               row-cols-lg-5
               g-2">
@@ -46,7 +46,7 @@ export default {
       query_params: {
         page: +this.$route.query.page || 1,
         perPage: +this.$route.query.perPage || 10,
-        role: this.$route.query.role,
+        role: this.$route.query.role || null,
       },
       userForDeletion: {},
     };

@@ -1,11 +1,11 @@
 <template>
   <h5 class="display-5 text-center">
     Posts
-    <span v-if="$route.query.username">
-      {{ `of user ${$route.query.username}` }}
+    <span v-if="query_params.username">
+      {{ `of user ${query_params.username}` }}
     </span>
-        <span v-if="$route.query.tag">
-      {{ `with tag #${$route.query.tag}` }}
+        <span v-if="query_params.tag">
+      {{ `with tag #${query_params.tag}` }}
     </span>
   </h5>
   <table-header  :item-name="`posts`"

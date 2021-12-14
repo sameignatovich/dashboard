@@ -7,54 +7,35 @@
                 :current-page="page"
                 @change-page="changePage"
                 @change-per-page-count="changePerPageCount" />
-  <div class='table-responsive'>
-    <table class='table table-striped table-hover caption-top'>
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Published</th>
-          <th scope="col">Author</th>
-          <th scope="col">Comments</th>
-          <th scope="col">
-            <router-link to='/posts/new' class='btn btn-success btn-sm'>
-              <i class="bi bi-plus"></i>
-            </router-link>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <transition-group name="post">
-          <tr v-for='post in posts' :key='post.id' class='post-item'>
-            <td>
-              <router-link  :to="`/posts/${post.id}`">
-                {{ post.title }}
-              </router-link>
-            </td>
-            <td>
-              {{ $formatdate(post.created_at) }}
-            </td>
-            <td>
-              <router-link :to="`/users/${post.author.user_id}`">
-                {{ post.author.username }}
-              </router-link>
-            </td>
-            <td>
-              {{ post.comments_count }}
-            </td>
-            <td>
-              <button type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#deletePost"
-                      @click="postForDeletion = post"
-                      class="btn btn-sm btn-danger">
-                <i class="bi bi-x-lg"></i>
-              </button>
-            </td>
-          </tr>
-        </transition-group>
-      </tbody>
-    </table>
-  </div>
+  <transition-group name="post">
+    <div v-for='post in posts'
+         :key='post.id'
+         class="shadow p-3 mb-3 bg-body rounded post-item">
+      <h5>
+        <router-link  :to="`/posts/${post.id}`">
+          {{ post.title }}
+        </router-link>
+      </h5>
+      <div>
+        {{ $formatdate(post.created_at) }}
+        |
+        <router-link :to="`/users/${post.author.user_id}`">
+          {{ post.author.username }}
+        </router-link>
+        |
+        <i class="bi bi-chat-left-text-fill"></i>
+        {{ post.comments_count }}
+      </div>
+
+      <button type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#deletePost"
+              @click="postForDeletion = post"
+              class="btn btn-sm btn-danger mt-1">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+  </transition-group>
 
   <modal-dialogue title='Remove post?'
                   body='You sure want to delete this post'
@@ -134,13 +115,18 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-.post-enter-active,
-.post-leave-active {
-  transition: all .5s ease;
-}
-.post-enter-from,
-.post-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
+  .post-enter-active,
+  .post-leave-active {
+    transition: all .5s ease;
+  }
+
+  .post-enter-from,
+  .post-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
 </style>

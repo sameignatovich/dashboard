@@ -1,18 +1,10 @@
 <template>
-  <div class="shadow-lg p-3 bg-body rounded mb-3">
+  <post-placeholder v-if="loading" />
+  <div v-else class="shadow-lg p-3 bg-body rounded mb-3">
     <h2>
-      <span v-if="loading"
-            class="placeholder col-6 bg-secondary placeholder-wave rounded">
-      </span>
-      <span v-else>
-        {{ post.title }}
-      </span>
+      {{ post.title }}
     </h2>
-    <p v-if="loading" class="fw-normal">
-      <span class="placeholder col-4 bg-secondary placeholder-wave rounded">
-      </span>
-    </p>
-    <p v-else class="fw-normal">
+    <p class="fw-normal">
       wrote by
       <router-link :to="`/users/${post.author.user_id}`">{{ post.author.username }}</router-link>
       <span class="fw-light ms-1">
@@ -20,20 +12,11 @@
       </span>
     </p>
     <hr>
-    <div v-if="loading" class='post-body'>
-      <span v-for="index in 10" :key="index"
-            class="placeholder col-9 bg-secondary placeholder-wave rounded">
-      </span>
-    </div>
-    <div v-else class='post-body'>
+    <div class='post-body'>
       {{ post.text }}
     </div>
     <hr>
-    <div v-if="loading" class='post-tags'>
-      <span class="placeholder col-6 bg-primary placeholder-wave rounded">
-      </span>
-    </div>
-    <div v-else class='post-tags'>
+    <div class='post-tags'>
       <b>Tags:</b>
       <router-link v-for="tag in post.tags"
                    :key="tag.name"
@@ -46,6 +29,8 @@
 </template>
 
 <script>
+import PostPlaceholder from '@/components/PostPlaceholder.vue';
+
 export default {
   props: {
     post: {
@@ -56,6 +41,9 @@ export default {
       type: Boolean,
       required: true,
     },
+  },
+  components: {
+    PostPlaceholder,
   },
 };
 </script>

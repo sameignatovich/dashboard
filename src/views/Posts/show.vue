@@ -1,5 +1,5 @@
 <template>
-  <post :post="post" />
+  <post :post="post" :loading="loading" />
   <comments :postId="postId" />
 </template>
 
@@ -14,6 +14,7 @@ export default {
         author: {},
         tags: [],
       },
+      loading: true,
     };
   },
   computed: {
@@ -31,9 +32,11 @@ export default {
           .then((response) => {
             this.post = response.data;
             resolve(response);
+            this.loading = false;
           })
           .catch((error) => {
             reject(error);
+            this.loading = false;
           });
       });
     },

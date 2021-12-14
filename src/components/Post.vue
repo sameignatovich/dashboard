@@ -10,8 +10,19 @@
         {{ $formatdate(post.created_at, '"at" HH:MM dd.mm.yyyy') }}
       </span>
     </p>
+    <hr>
     <div class='post-body'>
       {{ post.text }}
+    </div>
+    <hr>
+    <div class='post-tags'>
+      <b>Tags:</b>
+      <router-link v-for="tag in post.tags"
+                   :key="tag.name"
+                   :to="`/posts?tag=${tag.name}`"
+                   class="m-1 tag">
+        #{{ tag.name }}
+      </router-link>
     </div>
   </div>
 </template>
@@ -28,4 +39,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .tag {
+    text-decoration: none;
+  }
 </style>

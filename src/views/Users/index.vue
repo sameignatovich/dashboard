@@ -2,8 +2,8 @@
  <h5 class="display-5 text-center">Users</h5>
   <TableHeader  :item-name="`users`"
                 :total-items-count="usersCount"
-                :items-per-page="perPage"
-                :current-page="page"
+                :items-per-page="query_params.perPage"
+                :current-page="query_params.page"
                 @change-page="changePage"
                 @change-per-page-count="changePerPageCount" />
 
@@ -43,20 +43,18 @@ export default {
     return {
       users: [],
       usersCount: 0,
-      page: 1,
-      perPage: 10,
+      query_params: {
+        page: +this.$route.query.page || 1,
+        perPage: +this.$route.query.perPage || 10,
+        role: this.$route.query.role,
+      },
       userForDeletion: {},
     };
   },
   methods: {
     fetchUsers() {
       return new Promise((resolve, reject) => {
-        this.$http.get('/users', {
-          params: {
-            page: this.page,
-            perPage: this.perPage,
-          },
-        })
+        this.$http.get('/users', { params: this.query_params })
           .then((response) => {
             this.users = response.data.users;
             this.usersCount = response.data.totalUsersCount;
@@ -85,11 +83,12 @@ export default {
       });
     },
     changePage(page) {
-      this.page = page;
+      this.query_params.page = page;
       this.fetchUsers();
     },
     changePerPageCount(count) {
-      this.perPage = count;
+      this.query_params.perPage = count;
+      this.query_params.page = 1;
       this.fetchUsers();
     },
   },

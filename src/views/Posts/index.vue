@@ -3,8 +3,8 @@
   <table-header  :item-name="`posts`"
                 :table-items="posts"
                 :total-items-count="postsCount"
-                :items-per-page="perPage"
-                :current-page="page"
+                :items-per-page="query_params.perPage"
+                :current-page="query_params.page"
                 @change-page="changePage"
                 @change-per-page-count="changePerPageCount" />
   <transition-group name="post">
@@ -56,8 +56,12 @@ export default {
     return {
       posts: [],
       postsCount: 0,
-      page: 1,
-      perPage: 10,
+      query_params: {
+        page: 1,
+        perPage: 10,
+        tag: null,
+        user_id: null,
+      },
       postForDeletion: {},
     };
   },
@@ -66,8 +70,10 @@ export default {
       return new Promise((resolve, reject) => {
         this.$http.get('/posts', {
           params: {
-            page: this.page,
-            perPage: this.perPage,
+            page: this.query_params.page,
+            perPage: this.query_params.perPage,
+            tag: this.query_params.tag,
+            user_id: this.query_params.user_id,
           },
         })
           .then((response) => {
@@ -85,7 +91,7 @@ export default {
         this.$http.delete(`/posts/${postId}`)
           .then((response) => {
             this.posts.splice(this.posts.findIndex((i) => i.id === postId), 1);
-            this.totalPostsCount -= 1;
+            this.postsCount -= 1;
 
             this.$toast.success(`Post with id ${postId} deleted`);
             resolve(response);
@@ -96,11 +102,13 @@ export default {
       });
     },
     changePage(page) {
-      this.page = page;
+      this.query_params.page = page;
+      this.$route.query.page = page;
       this.fetchPosts();
     },
     changePerPageCount(count) {
-      this.perPage = count;
+      this.query_params.perPage = count;
+      this.query_params.page = 1;
       this.fetchPosts();
     },
   },

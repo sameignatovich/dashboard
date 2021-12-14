@@ -15,7 +15,11 @@
           <th scope="col">Published</th>
           <th scope="col">Author</th>
           <th scope="col">Comments</th>
-          <th scope="col"></th>
+          <th scope="col">
+            <router-link to='/posts/new' class='btn btn-success btn-sm'>
+              <i class="bi bi-plus"></i>
+            </router-link>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -42,7 +46,7 @@
                       data-bs-toggle="modal"
                       data-bs-target="#deletePost"
                       @click="postForDeletion = post"
-                      class="btn bnt-sm btn-danger">
+                      class="btn btn-sm btn-danger">
                 <i class="bi bi-x-lg"></i>
               </button>
             </td>

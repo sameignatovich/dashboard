@@ -57,8 +57,8 @@ export default {
           post: {
             title: this.title,
             text: this.text,
+            tags_list: this.tags,
           },
-          tags_list: this.tags,
         })
           .then((response) => {
             this.post = response.data;

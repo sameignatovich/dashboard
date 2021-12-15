@@ -15,6 +15,12 @@
                 :current-page="query_params.page"
                 @change-page="changePage"
                 @change-per-page-count="changePerPageCount" />
+
+  <router-link to="/posts/new" class="btn btn-success m-2">
+    <i class="bi bi-plus-lg"></i>
+    Create post
+  </router-link>
+
   <transition-group name="post">
     <div v-for='post in posts'
          :key='post.id'

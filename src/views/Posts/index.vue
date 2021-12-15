@@ -135,8 +135,4 @@ export default {
     transform: translateX(20px);
     opacity: 0;
   }
-
-  a {
-    text-decoration: none;
-  }
 </style>

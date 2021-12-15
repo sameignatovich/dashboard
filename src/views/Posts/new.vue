@@ -76,7 +76,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
   .remove-tag:hover {
     color: #fff;
     background-color: #dc3545;

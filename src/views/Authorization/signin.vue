@@ -76,7 +76,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
   #form-signin {
     align-items: center;
     display: -ms-flexbox;

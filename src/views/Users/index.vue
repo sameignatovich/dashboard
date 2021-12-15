@@ -104,13 +104,13 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-.user-enter-active,
-.user-leave-active {
-  transition: all .5s ease;
-}
-.user-enter-from,
-.user-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
+  .user-enter-active,
+  .user-leave-active {
+    transition: all .5s ease;
+  }
+  .user-enter-from,
+  .user-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
 </style>

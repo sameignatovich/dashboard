@@ -14,10 +14,8 @@ import FormatDate from './plugins/FormatDate';
 // Components
 import ModalDialogue from './components/ModalDialogue.vue';
 
-// Frameworks assets
-import 'bootstrap';
-
-// Global styles
+// Global assets
+import '@/assets/js/app';
 import '@/assets/styles/app.scss';
 
 // Preload routine

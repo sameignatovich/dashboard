@@ -21,7 +21,7 @@
       <router-link v-for="tag in post.tags"
                    :key="tag.name"
                    :to="`/posts?tag=${tag.name}`"
-                   class="m-1 tag">
+                   class="m-1">
         #{{ tag.name }}
       </router-link>
     </div>
@@ -47,9 +47,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-  .tag {
-    text-decoration: none;
-  }
-</style>

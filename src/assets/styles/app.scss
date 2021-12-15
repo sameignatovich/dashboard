@@ -1,2 +1,9 @@
-@import 'bootstrap';
+// Bootstrap
+@import "bootstrap";
+
+// Bootstrap-Icons
 @import '~bootstrap-icons/font/bootstrap-icons.css';
+
+a {
+  text-decoration: none;
+}

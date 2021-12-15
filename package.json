@@ -9,7 +9,6 @@
     "deploy": "scp dist.tar.xz nginx@vm1:/home/nginx/www/dashboard.big.wtf/; ssh -t nginx@vm1 'cd /home/nginx/www/dashboard.big.wtf; tar xvf dist.tar.xz; rm -rf dist.tar.xz public; mv dist public'"
   },
   "dependencies": {
-    "@fullhuman/postcss-purgecss": "3.1.3",
     "@meforma/vue-toaster": "^1.2.2",
     "@popperjs/core": "^2.10.2",
     "axios": "^0.24.0",
@@ -24,7 +23,6 @@
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
-    "@fullhuman/vue-cli-plugin-purgecss": "~4.1.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-pwa": "~4.5.0",

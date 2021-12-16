@@ -3,11 +3,11 @@
   <form @submit.prevent="createPost">
     <div class="mb-3">
       <label for="title" class="form-label">Title:</label>
-      <input v-model="title" type="text" class="form-control" id="title">
+      <input v-model="post.title" type="text" class="form-control" id="title">
     </div>
     <div class="mb-3">
       <label for="text" class="form-label">Text:</label>
-      <textarea v-model="text" class="form-control" id="text" rows="5">
+      <textarea v-model="post.text" class="form-control" id="text" rows="5">
       </textarea>
     </div>
     <div class="mb-3">
@@ -37,31 +37,28 @@
 export default {
   data() {
     return {
-      title: null,
-      text: null,
+      post: {
+        title: null,
+        text: null,
+        tags_list: [],
+      },
       tag: null,
-      tags: [],
     };
   },
   methods: {
     addTag() {
-      this.tags.push(this.tag);
+      this.post.tags_list.push(this.tag);
       this.tag = null;
     },
     removeTag(index) {
-      this.tags.splice(index, 1);
+      this.post.tags_list.splice(index, 1);
     },
     createPost() {
       return new Promise((resolve, reject) => {
-        this.$http.post('/posts', {
-          post: {
-            title: this.title,
-            text: this.text,
-            tags_list: this.tags,
-          },
-        })
+        this.$http.post('/posts', { post: this.post })
           .then((response) => {
-            this.post = response.data;
+            this.$router.push(`/posts/${response.data.id}`);
+            this.$toast.success('Post created');
             resolve(response);
           })
           .catch((error) => {

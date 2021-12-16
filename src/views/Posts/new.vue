@@ -1,6 +1,5 @@
 <template>
   <h5 class="text-center display-5">New post</h5>
-  <form @submit.prevent="createPost">
     <div class="mb-3">
       <label for="title" class="form-label">Title:</label>
       <input v-model="post.title" type="text" class="form-control" id="title">
@@ -12,7 +11,7 @@
     </div>
     <div class="mb-3">
       <label for="tag" class="form-label">Tags:</label>
-      <button v-for="(tag, index) in tags"
+      <button v-for="(tag, index) in post.tags_list"
               :key="tag"
               @click="removeTag(index)"
               type="button"
@@ -20,17 +19,21 @@
         #{{ tag }}
       </button>
       <div class="input-group">
-        <input v-model="tag" id="tag" type="text" class="form-control" aria-describedby="tag">
-        <button @click.prevent="addTag"
+        <input v-model="tag"
+               @keyup.enter="addTag"
+               type="text"
+               class="form-control">
+        <button @click="addTag"
                 class="btn btn-outline-secondary"
-                type="button"
-                id="tag">
+                type="button" >
           Add Tag
         </button>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-  </form>
+    <button @click="createPost"
+            class="btn btn-primary">
+      Create
+    </button>
 </template>
 
 <script>

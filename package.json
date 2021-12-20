@@ -22,6 +22,9 @@
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
+  "resolutions": {
+    "@vue/devtools-api": "6.0.0-beta.20.1"
+  },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",

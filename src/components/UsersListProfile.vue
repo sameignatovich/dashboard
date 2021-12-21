@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/users/${user.id}`">
+  <router-link :to="`/users/${user.username}`">
     <div class="card text-center">
       <img :src="user.avatar" class="card-img-top" alt="Avatar">
       <div class="card-body">

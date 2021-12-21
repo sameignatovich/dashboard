@@ -8,7 +8,7 @@ export default [
     },
   },
   {
-    path: '/users/:id',
+    path: '/users/:username',
     name: 'User',
     component: () => import(/* webpackChunkName: "users" */ '@/views/Users/show.vue'),
     meta: {

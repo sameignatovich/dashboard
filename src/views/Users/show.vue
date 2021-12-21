@@ -13,14 +13,6 @@
             <i class="bi bi-envelope-fill"></i>
             {{ user.email }}
           </p>
-          <p>
-            <i class="bi bi-telephone-fill"></i>
-            {{ user.phone }}
-          </p>
-          <p>
-            <i class="bi bi-geo-alt-fill"></i>
-            {{ user.address }}
-          </p>
           <hr/>
           <p>
             <b>Updated:</b>
@@ -65,14 +57,14 @@ export default {
     };
   },
   computed: {
-    userId() {
-      return this.$route.params.id;
+    username() {
+      return this.$route.params.username;
     },
   },
   methods: {
-    fetchUser(userId) {
+    fetchUser(username) {
       return new Promise((resolve, reject) => {
-        this.$http.get(`/users/${userId}`)
+        this.$http.get(`/users/${username}`)
           .then((response) => {
             this.user = response.data;
             resolve(response);
@@ -82,11 +74,11 @@ export default {
           });
       });
     },
-    fetchUserPosts(userId) {
+    fetchUserPosts(username) {
       return new Promise((resolve, reject) => {
-        this.$http.get(`/users/${userId}/posts`)
+        this.$http.get(`/posts?username=${username}`)
           .then((response) => {
-            this.posts = response.data;
+            this.posts = response.data.posts;
             resolve(response);
           })
           .catch((error) => {
@@ -96,8 +88,8 @@ export default {
     },
   },
   beforeMount() {
-    this.fetchUser(this.userId);
-    this.fetchUserPosts(this.userId);
+    this.fetchUser(this.username);
+    this.fetchUserPosts(this.username);
   },
   watch: {
     user() {

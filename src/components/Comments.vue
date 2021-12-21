@@ -16,8 +16,7 @@
             {{ $formatdate(comment.created_at, 'dd.mm.yyyy "at" HH:MM') }}
           </span>
         </div>
-        <div class="comment-body fw-normal">
-          {{ comment.body }}
+        <div class="comment-body fw-normal" v-html="comment.content">
         </div>
       </div>
     </div>

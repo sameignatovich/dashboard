@@ -12,8 +12,7 @@
       </span>
     </p>
     <hr>
-    <div class='post-body'>
-      {{ post.text }}
+    <div class='post-body' v-html="post.content">
     </div>
     <hr>
     <div class='post-tags'>

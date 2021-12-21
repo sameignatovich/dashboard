@@ -57,8 +57,7 @@
             <div class="col-md-4">
               <b>Last comment</b>
               <br/>
-              {{ info.comments.last_comment.body }}
-              <br/>
+              <span v-html="info.comments.last_comment.content"></span>
               ({{ $formatdate(info.comments.last_comment.created_at, 'HH:MM dd.mm.yyyy') }})
             </div>
           </div>

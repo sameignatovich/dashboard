@@ -17,7 +17,7 @@
       </a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
         <li>
-          <router-link :to="`/users/${user.id}`"
+          <router-link :to="`/users/${user.username}`"
                        class="dropdown-item">
             <i class="bi bi-person-circle"></i>
             Profile

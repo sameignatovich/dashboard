@@ -84,11 +84,13 @@ export default {
     },
     changePage(page) {
       this.query_params.page = page;
+      this.$router.push({ path: '/users', query: this.query_params });
       this.fetchUsers();
     },
     changePerPageCount(count) {
       this.query_params.perPage = count;
       this.query_params.page = 1;
+      this.$router.push({ path: '/users', query: this.query_params });
       this.fetchUsers();
     },
   },

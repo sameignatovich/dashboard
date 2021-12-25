@@ -6,7 +6,14 @@ const authorizationModule = {
   state() {
     return {
       token: null,
-      user: {},
+      user: {
+        id: null,
+        full_name: null,
+        username: null,
+        obfuscated_email: null,
+        avatar: null,
+        role: null,
+      },
       errorMessage: null,
     };
   },
@@ -68,6 +75,18 @@ const authorizationModule = {
 
               resolve(response);
             }
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+    updateProfile({ commit }, profileData) {
+      return new Promise((resolve, reject) => {
+        axios.put('/current/profile', profileData)
+          .then((response) => {
+            commit('SET_USER', response.data);
+            resolve(response);
           })
           .catch((error) => {
             reject(error);

@@ -96,6 +96,7 @@ const authorizationModule = {
   },
   getters: {
     token: (state) => state.token,
+    tokenId: (state) => JSON.parse(atob(state.token.split('.')[1])).data,
     user: (state) => state.user,
     errorMessage: (state) => state.errorMessage,
     isAuthorized: (state) => !!state.token,

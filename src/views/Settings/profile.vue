@@ -60,7 +60,13 @@ export default {
   },
   methods: {
     updateProfile() {
-      this.$store.dispatch('auth/updateProfile', this.user);
+      this.$store.dispatch('auth/updateProfile', this.user)
+        .then(() => {
+          this.$toast.success('Profile updated!');
+        })
+        .catch(() => {
+          this.$toast.error('Error during profile update');
+        });
     },
   },
 };

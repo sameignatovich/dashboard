@@ -35,7 +35,7 @@ createApp(App)
     maxToasts: 3,
   })
   .use(PageTitle, {
-    titleSuffix: 'Simple Dashboard',
+    titleSuffix: 'Dashboard',
   })
   .use(FormatDate)
   .component('modal-dialogue', ModalDialogue)

@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build; tar Jcvf dist.tar.xz dist",
     "lint": "vue-cli-service lint",
-    "deploy": "scp dist.tar.xz nginx@vm1:/home/nginx/www/dashboard.big.wtf/; ssh -t nginx@vm1 'cd /home/nginx/www/dashboard.big.wtf; tar xvf dist.tar.xz; rm -rf dist.tar.xz public; mv dist public'"
+    "deploy": "scp dist.tar.xz nginx@big.wtf:/home/nginx/www/dashboard.big.wtf/; ssh -t nginx@big.wtf 'cd /home/nginx/www/dashboard.big.wtf; tar xvf dist.tar.xz; rm -rf dist.tar.xz public; mv dist public'"
   },
   "dependencies": {
     "@meforma/vue-toaster": "^1.2.2",

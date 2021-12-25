@@ -33,12 +33,12 @@
       <div>
         {{ $formatdate(post.created_at) }}
         |
+        <i class="bi bi-chat-left-text-fill"></i>
+        {{ post.comments_count }}
+        |
         <router-link :to="`/users/${post.author.user_id}`">
           {{ post.author.username }}
         </router-link>
-        |
-        <i class="bi bi-chat-left-text-fill"></i>
-        {{ post.comments_count }}
       </div>
 
       <button type="button"

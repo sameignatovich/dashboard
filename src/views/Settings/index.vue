@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-sm-3">
       <nav class="nav nav-pills flex-column">
         <router-link to="/settings/profile" class="nav-link">
           Profile data
@@ -11,9 +11,12 @@
         <router-link to="/settings/password" class="nav-link">
           Password
         </router-link>
+        <router-link to="/settings/activity" class="nav-link">
+          Account activity
+        </router-link>
       </nav>
     </div>
-    <div class="col-md-10">
+    <div class="col-sm-9">
       <router-view />
     </div>
   </div>

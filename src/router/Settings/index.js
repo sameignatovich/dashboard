@@ -11,25 +11,21 @@ export default [
         path: '/settings/profile',
         name: 'Edit profile',
         component: () => import(/* webpackChunkName: "settings" */ '@/views/Settings/profile.vue'),
-        meta: {
-          requiresAuth: true,
-        },
       },
       {
         path: '/settings/avatar',
         name: 'Change avatar',
         component: () => import(/* webpackChunkName: "settings" */ '@/views/Settings/avatar.vue'),
-        meta: {
-          requiresAuth: true,
-        },
       },
       {
         path: '/settings/password',
         name: 'Change password',
         component: () => import(/* webpackChunkName: "settings" */ '@/views/Settings/password.vue'),
-        meta: {
-          requiresAuth: true,
-        },
+      },
+      {
+        path: '/settings/activity',
+        name: 'Account activity',
+        component: () => import(/* webpackChunkName: "settings" */ '@/views/Settings/activity.vue'),
       },
     ],
   },

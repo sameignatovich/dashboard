@@ -46,7 +46,7 @@ export default {
       query_params: {
         page: +this.$route.query.page || 1,
         perPage: +this.$route.query.perPage || 10,
-        role: this.$route.query.role || null,
+        role: this.$route.query.role,
       },
       userForDeletion: {},
     };

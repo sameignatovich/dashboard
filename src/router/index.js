@@ -4,12 +4,14 @@ import Pages from './Pages';
 import Authorization from './Authorization';
 import Users from './Users';
 import Posts from './Posts';
+import Settings from './Settings';
 
 const routes = [
   ...Pages,
   ...Authorization,
   ...Users,
   ...Posts,
+  ...Settings,
 ];
 
 const router = createRouter({

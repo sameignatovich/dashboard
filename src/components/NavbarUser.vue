@@ -23,6 +23,13 @@
             Profile
           </router-link>
         </li>
+        <li>
+          <router-link to="/settings/profile"
+                       class="dropdown-item">
+            <i class="bi bi-gear-wide-connected"></i>
+            Settings
+          </router-link>
+        </li>
         <li><hr class="dropdown-divider"></li>
         <li>
           <button @click="signout"

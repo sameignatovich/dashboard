@@ -54,6 +54,13 @@
               <b>Signed in: </b>
               {{ $formatdate(token.created_at) }}
             </div>
+            <div v-if="token.active && token.id != currentTokenId"
+                 class="col-sm-6 text-end">
+              <button @click="setTokenInactive(token.id)"
+                      class="btn btn-sm btn-danger">
+                End this session
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -82,6 +89,19 @@ export default {
       this.$http.get('/tokens')
         .then((response) => {
           this.tokens = response.data.tokens;
+        })
+        .catch(() => {
+          this.$toast.error('Error on sessions loading!');
+        });
+    },
+    setTokenInactive(tokenId) {
+      this.$http.delete(`/tokens/${tokenId}`)
+        .then(() => {
+          this.$toast.success('Session ended!');
+          this.fetchTokens();
+        })
+        .catch(() => {
+          this.$toast.error('Error on session ending!');
         });
     },
   },

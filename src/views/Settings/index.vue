@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-sm-3">
-      <nav class="nav nav-pills flex-column">
+      <nav class="nav nav-pills flex-column mb-3">
         <router-link to="/settings/profile" class="nav-link">
           Profile data
         </router-link>

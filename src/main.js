@@ -21,7 +21,7 @@ import '@/assets/styles/app.scss';
 // Preload routine
 const token = localStorage.getItem('token');
 if (token) {
-  store.dispatch('auth/autologin', token);
+  store.dispatch('user/autologin', token);
 }
 
 // Application initialization

@@ -21,7 +21,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  if (to.meta.requiresAuth && !store.getters['auth/isAuthorized']) {
+  if (to.meta.requiresAuth && !store.getters['user/isAuthorized']) {
     return {
       path: '/signin',
       query: { redirect: to.fullPath },

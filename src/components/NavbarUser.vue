@@ -47,15 +47,15 @@
 export default {
   computed: {
     authorized() {
-      return this.$store.getters['auth/isAuthorized'];
+      return this.$store.getters['user/isAuthorized'];
     },
     user() {
-      return this.$store.getters['auth/user'];
+      return this.$store.getters['user/user'];
     },
   },
   methods: {
     signout() {
-      this.$store.dispatch('auth/signout')
+      this.$store.dispatch('user/signout')
         .then(() => {
           this.$router.push('/');
         });

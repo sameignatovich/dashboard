@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      storedUser: 'auth/user',
+      storedUser: 'user/user',
     }),
   },
   beforeMount() {
@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     updateProfile() {
-      this.$store.dispatch('auth/updateProfile', this.user)
+      this.$store.dispatch('user/updateProfile', this.user)
         .then(() => {
           this.$toast.success('Profile updated!');
         })

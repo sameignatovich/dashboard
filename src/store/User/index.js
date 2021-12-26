@@ -1,6 +1,6 @@
 import axios from '@/plugins/axios';
 
-const authorizationModule = {
+const userModule = {
   namespaced: true,
 
   state() {
@@ -103,4 +103,4 @@ const authorizationModule = {
   },
 };
 
-export default authorizationModule;
+export default userModule;

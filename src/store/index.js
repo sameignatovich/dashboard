@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import authorizationModule from './Authorization';
+import userModule from './User';
 import informationModule from './Information';
 
 export default createStore({
@@ -13,6 +13,6 @@ export default createStore({
   },
   modules: {
     info: informationModule,
-    auth: authorizationModule,
+    user: userModule,
   },
 });

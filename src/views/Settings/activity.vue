@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     currentTokenId() {
-      return this.$store.getters['auth/tokenId'];
+      return this.$store.getters['user/tokenId'];
     },
     activeTokens() {
       return this.tokens.filter((element) => element.active);

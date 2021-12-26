@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     errorMessage() {
-      return this.$store.getters['auth/errorMessage'];
+      return this.$store.getters['user/errorMessage'];
     },
   },
   methods: {
@@ -55,7 +55,7 @@ export default {
         },
       };
 
-      this.$store.dispatch('auth/signin', signinData)
+      this.$store.dispatch('user/signin', signinData)
         .then(() => {
           if (this.$route.query.redirect != null) {
             this.$router.push(this.$route.query.redirect);

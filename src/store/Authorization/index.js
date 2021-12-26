@@ -10,7 +10,7 @@ const authorizationModule = {
         id: null,
         full_name: null,
         username: null,
-        obfuscated_email: null,
+        email: null,
         avatar: null,
         role: null,
       },

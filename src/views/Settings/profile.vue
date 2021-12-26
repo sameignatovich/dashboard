@@ -26,7 +26,7 @@
     <div class="row mb-3">
       <label for="emailInput" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10">
-        <input :value="storedUser.obfuscated_email"
+        <input :value="storedUser.email"
                @input="user.email = $event.target.value"
                type="email"
                class="form-control"

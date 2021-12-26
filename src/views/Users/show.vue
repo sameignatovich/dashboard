@@ -10,8 +10,14 @@
           </div>
           <hr/>
           <p>
-            <i class="bi bi-envelope-fill"></i>
-            {{ user.email }}
+            <i class="bi bi-stickies-fill"></i>
+            Posts:
+            {{ user.posts_count }}
+          </p>
+          <p>
+            <i class="bi bi-chat-left-text-fill"></i>
+            Comments:
+            {{ user.comments_count }}
           </p>
           <hr/>
           <p>

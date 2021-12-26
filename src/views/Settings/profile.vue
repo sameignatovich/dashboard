@@ -65,7 +65,7 @@ export default {
           this.$toast.success('Profile updated!');
         })
         .catch(() => {
-          this.$toast.error('Error during profile update');
+          this.$toast.error('Error during profile update!');
         });
     },
   },

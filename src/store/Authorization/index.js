@@ -42,7 +42,7 @@ const authorizationModule = {
       return new Promise((resolve, reject) => {
         axios.post('/autologin.json')
           .then((response) => {
-            commit('SET_USER', response.data.user);
+            commit('SET_USER', response.data);
             resolve(response);
           })
           .catch((error) => {

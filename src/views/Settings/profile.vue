@@ -10,14 +10,21 @@
                @input="user.full_name = $event.target.value"
                type="text"
                class="form-control"
+               :class="{'is-invalid': errors.full_name}"
                id="fullnameInput">
+        <div class="invalid-feedback">
+          <ul>
+            <li v-for="inputError in errors.full_name" :key="inputError">
+              {{ inputError }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="row mb-3">
       <label for="usernameInput" class="col-sm-2 col-form-label">Username</label>
       <div class="col-sm-10">
         <input :value="storedUser.username"
-               @input="user.username = $event.target.value"
                type="text"
                class="form-control"
                id="usernameInput"
@@ -34,7 +41,15 @@
                @input="user.email = $event.target.value"
                type="email"
                class="form-control"
+               :class="{'is-invalid': errors.email}"
                id="emailInput">
+        <div class="invalid-feedback">
+          <ul>
+            <li v-for="inputError in errors.email" :key="inputError">
+              {{ inputError }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="row mb-3">
@@ -52,6 +67,7 @@ export default {
   data() {
     return {
       user: {},
+      errors: {},
     };
   },
   computed: {
@@ -64,11 +80,14 @@ export default {
   },
   methods: {
     updateProfile() {
+      this.errors = {};
+
       this.$store.dispatch('user/updateProfile', this.user)
         .then(() => {
           this.$toast.success('Profile updated!');
         })
-        .catch(() => {
+        .catch((error) => {
+          this.errors = error.response.data;
           this.$toast.error('Error during profile update!');
         });
     },

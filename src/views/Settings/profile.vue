@@ -20,7 +20,11 @@
                @input="user.username = $event.target.value"
                type="text"
                class="form-control"
-               id="usernameInput">
+               id="usernameInput"
+               disabled>
+        <div id="usernameHelp" class="form-text">
+          Username can be changed only through support
+        </div>
       </div>
     </div>
     <div class="row mb-3">

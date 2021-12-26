@@ -2,8 +2,19 @@
   <h1 class="text-center">
     Account activity
   </h1>
+
+  <div class="form-check mb-2 ms-2">
+    <input v-model="filterActive"
+           class="form-check-input"
+           type="checkbox"
+           id="flexCheck">
+    <label class="form-check-label" for="flexCheck">
+      Only active
+    </label>
+  </div>
+
   <div class="accordion" id="tokens-an">
-    <div v-for="token in tokens"
+    <div v-for="token in tokensList"
          :key="token.id"
          class="accordion-item">
       <h2 class="accordion-header" :id="`tn-${token.id}`">
@@ -72,12 +83,22 @@
 export default {
   data() {
     return {
+      filterActive: true,
       tokens: [],
     };
   },
   computed: {
     currentTokenId() {
       return this.$store.getters['auth/tokenId'];
+    },
+    activeTokens() {
+      return this.tokens.filter((element) => element.active);
+    },
+    tokensList() {
+      if (this.filterActive) {
+        return this.activeTokens;
+      }
+      return this.tokens;
     },
   },
   beforeMount() {

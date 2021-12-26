@@ -9,7 +9,8 @@
         <input v-model="user.old_password"
                type="password"
                class="form-control"
-               :class="{'is-invalid': errors.old_password}">
+               :class="{'is-invalid': errors.old_password}"
+               required>
         <div class="invalid-feedback">
           <ul>
             <li v-for="inputError in errors.old_password" :key="inputError">
@@ -24,7 +25,8 @@
       <div class="col-sm-9">
         <input v-model="user.password"
                type="password"
-               class="form-control">
+               class="form-control"
+               required>
       </div>
     </div>
     <div class="row mb-3">
@@ -33,7 +35,8 @@
         <input v-model="user.password_confirmation"
                type="password"
                class="form-control"
-               :class="{'is-invalid': errors.password_confirmation}">
+               :class="{'is-invalid': errors.password_confirmation}"
+               required>
         <div class="invalid-feedback">
           <ul>
             <li v-for="inputError in errors.password_confirmation" :key="inputError">
@@ -45,21 +48,21 @@
     </div>
     <div class="row mb-3">
       <div class="col-sm-9 offset-sm-3">
-        <button type="submit" class="btn btn-primary">Change password</button>
+        <button-spinner :loading="loading"
+                        text="Change password" />
       </div>
     </div>
   </form>
 </template>
 
 <script>
+import ButtonSpinner from '@/components/ButtonSpinner.vue';
+
 export default {
   data() {
     return {
-      user: {
-        old_password: null,
-        password: null,
-        password_confirmation: null,
-      },
+      user: {},
+      loading: false,
       errors: {},
     };
   },
@@ -69,6 +72,7 @@ export default {
   methods: {
     updatePassword() {
       this.errors = {};
+      this.loading = true;
 
       this.$store.dispatch('user/updatePassword', this.user)
         .then(() => {
@@ -77,8 +81,14 @@ export default {
         .catch((error) => {
           this.errors = error.response.data;
           this.$toast.error('Error during password change!');
+        })
+        .then(() => {
+          this.loading = false;
         });
     },
+  },
+  components: {
+    ButtonSpinner,
   },
 };
 </script>

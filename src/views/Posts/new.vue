@@ -30,13 +30,15 @@
         </button>
       </div>
     </div>
-    <button @click="createPost"
-            class="btn btn-primary">
-      Create
-    </button>
+    <button-spinner @click="createPost"
+                    :loading="loading"
+                    text="Post"
+                    waitingText="Posting..." />
 </template>
 
 <script>
+import ButtonSpinner from '@/components/ButtonSpinner.vue';
+
 export default {
   data() {
     return {
@@ -46,6 +48,7 @@ export default {
         tags_list: [],
       },
       tag: null,
+      loading: false,
     };
   },
   methods: {
@@ -57,6 +60,8 @@ export default {
       this.post.tags_list.splice(index, 1);
     },
     createPost() {
+      this.loading = true;
+
       return new Promise((resolve, reject) => {
         this.$http.post('/posts', { post: this.post })
           .then((response) => {
@@ -66,12 +71,18 @@ export default {
           })
           .catch((error) => {
             reject(error);
+          })
+          .then(() => {
+            this.loading = false;
           });
       });
     },
   },
   beforeMount() {
     this.$title('New post');
+  },
+  components: {
+    ButtonSpinner,
   },
 };
 </script>

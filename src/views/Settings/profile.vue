@@ -54,7 +54,8 @@
     </div>
     <div class="row mb-3">
       <div class="col-sm-10 offset-sm-2">
-        <button type="submit" class="btn btn-primary">Update profile</button>
+        <button-spinner :loading="loading"
+                        text="Update Profile" />
       </div>
     </div>
   </form>
@@ -62,11 +63,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import ButtonSpinner from '@/components/ButtonSpinner.vue';
 
 export default {
   data() {
     return {
       user: {},
+      loading: false,
       errors: {},
     };
   },
@@ -81,6 +84,7 @@ export default {
   methods: {
     updateProfile() {
       this.errors = {};
+      this.loading = true;
 
       this.$store.dispatch('user/updateProfile', this.user)
         .then(() => {
@@ -89,8 +93,14 @@ export default {
         .catch((error) => {
           this.errors = error.response.data;
           this.$toast.error('Error during profile update!');
+        })
+        .then(() => {
+          this.loading = false;
         });
     },
+  },
+  components: {
+    ButtonSpinner,
   },
 };
 </script>

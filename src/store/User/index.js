@@ -77,6 +77,7 @@ const userModule = {
             }
           })
           .catch((error) => {
+            commit('SET_ERROR', error.response.data);
             reject(error);
           });
       });
@@ -89,6 +90,19 @@ const userModule = {
             resolve(response);
           })
           .catch((error) => {
+            commit('SET_ERROR', error.response.data);
+            reject(error);
+          });
+      });
+    },
+    updatePassword({ commit }, passwords) {
+      return new Promise((resolve, reject) => {
+        axios.put('/current/password', { user: passwords })
+          .then((response) => {
+            resolve(response);
+          })
+          .catch((error) => {
+            commit('SET_ERROR', error.response.data);
             reject(error);
           });
       });

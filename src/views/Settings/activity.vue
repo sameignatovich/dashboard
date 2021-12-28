@@ -40,33 +40,36 @@
       </h2>
       <div :id="`co-${token.id}`"
            class="accordion-collapse collapse"
-           :aria-labelledby="`tn-${token.id}`"
-           data-bs-parent="#tokens-an">
+           :aria-labelledby="`tn-${token.id}`">
         <div class="accordion-body">
           <div class="row">
-            <div class="col-sm-3">
-              <b>IP: </b>
-              {{ token.ip }}
-            </div>
-            <div class="col-sm-3">
+            <div class="col-lg-6">
               <b>OS: </b>
               {{ token.os }}
             </div>
-            <div class="col-sm-3">
+            <div class="col-lg-6">
               <b>Device: </b>
               {{ token.device }}
             </div>
-            <div class="col-sm-3">
-              <b>Browser: </b>
-              {{ `${token.browser} ${token.browser_version}` }}
+            <div class="col-lg-6">
+              <b>Browser name: </b>
+              {{ token.browser }}
+            </div>
+            <div class="col-lg-6">
+              <b>Browser version: </b>
+              {{ token.browser_version }}
             </div>
             <hr class="mt-3" />
-            <div class="col-sm-6">
+            <div class="col-lg-4">
               <b>Signed in: </b>
               {{ $formatdate(token.created_at) }}
             </div>
+            <div class="col-lg-4">
+              <b>IP: </b>
+              {{ token.ip }}
+            </div>
             <div v-if="token.active && token.id != currentTokenId"
-                 class="col-sm-6 text-end">
+                 class="col-lg-4 text-end">
               <button @click="setTokenInactive(token.id)"
                       class="btn btn-sm btn-danger">
                 End this session

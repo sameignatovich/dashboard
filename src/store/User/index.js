@@ -31,6 +31,9 @@ const userModule = {
     SET_USER(state, user) {
       state.user = user;
     },
+    SET_AVATAR(state, url) {
+      state.user.avatar = url;
+    },
     SET_ERROR(state, errorMessage) {
       state.errorMessage = errorMessage;
     },
@@ -87,6 +90,19 @@ const userModule = {
         axios.put('/current/profile', profileData)
           .then((response) => {
             commit('SET_USER', response.data);
+            resolve(response);
+          })
+          .catch((error) => {
+            commit('SET_ERROR', error.response.data);
+            reject(error);
+          });
+      });
+    },
+    updateAvatar({ commit }, avatar) {
+      return new Promise((resolve, reject) => {
+        axios.put('/current/avatar', avatar)
+          .then((response) => {
+            commit('SET_AVATAR', response.data.user.avatar);
             resolve(response);
           })
           .catch((error) => {

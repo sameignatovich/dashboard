@@ -87,7 +87,7 @@ const userModule = {
     },
     updateProfile({ commit }, profileData) {
       return new Promise((resolve, reject) => {
-        axios.put('/current/profile', profileData)
+        axios.put('/settings/profile', { user: profileData })
           .then((response) => {
             commit('SET_USER', response.data);
             resolve(response);
@@ -100,7 +100,7 @@ const userModule = {
     },
     updateAvatar({ commit }, avatar) {
       return new Promise((resolve, reject) => {
-        axios.put('/current/avatar', avatar)
+        axios.put('/settings/avatar', avatar)
           .then((response) => {
             commit('SET_AVATAR', response.data.user.avatar);
             resolve(response);
@@ -113,7 +113,7 @@ const userModule = {
     },
     updatePassword({ commit }, passwords) {
       return new Promise((resolve, reject) => {
-        axios.put('/current/password', { user: passwords })
+        axios.put('/settings/password', { user: passwords })
           .then((response) => {
             resolve(response);
           })

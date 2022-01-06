@@ -6,7 +6,7 @@
     </h2>
     <p class="fw-normal">
       wrote by
-      <router-link :to="`/users/${post.author.user_id}`">{{ post.author.username }}</router-link>
+      <router-link :to="`/users/${post.author.username}`">{{ post.author.username }}</router-link>
       <span class="fw-light ms-1">
         {{ $formatdate(post.created_at, '"at" HH:MM dd.mm.yyyy') }}
       </span>

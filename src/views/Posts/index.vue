@@ -36,7 +36,7 @@
         <i class="bi bi-chat-left-text-fill"></i>
         {{ post.comments_count }}
         |
-        <router-link :to="`/users/${post.author.user_id}`">
+        <router-link :to="`/users/${post.author.username}`">
           {{ post.author.username }}
         </router-link>
       </div>

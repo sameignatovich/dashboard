@@ -20,18 +20,28 @@ export default {
   props: {
     currentCount: {
       type: Number,
-      required: false,
-      default: 10,
+      required: true,
     },
     itemsNumbers: {
       type: Array,
       required: false,
-      default: () => [5, 10, 25, 50, 100],
+      default: () => [5, 10, 25, 50],
     },
   },
   methods: {
     changeCount(perPage) {
       this.$emit('changePerPageCount', perPage);
+    },
+  },
+  watch: {
+    count(to) {
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          ...this.$route.query,
+          count: to,
+        },
+      });
     },
   },
 };

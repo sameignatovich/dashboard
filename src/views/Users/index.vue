@@ -1,11 +1,9 @@
 <template>
  <h5 class="display-5 text-center">Users</h5>
-  <TableHeader  :item-name="`users`"
+  <TableHeader  item-name="users"
                 :total-items-count="usersCount"
-                :items-per-page="query_params.perPage"
-                :current-page="query_params.page"
-                @change-page="changePage"
-                @change-per-page-count="changePerPageCount" />
+                :current-page="+$route.query.page || 1"
+                :current-count="+$route.query.count || 10" />
 
   <div class="row
               row-cols-sm-1
@@ -43,18 +41,13 @@ export default {
     return {
       users: [],
       usersCount: 0,
-      query_params: {
-        page: +this.$route.query.page || 1,
-        perPage: +this.$route.query.perPage || 10,
-        role: this.$route.query.role,
-      },
       userForDeletion: {},
     };
   },
   methods: {
     fetchUsers() {
       return new Promise((resolve, reject) => {
-        this.$http.get('/users', { params: this.query_params })
+        this.$http.get('/users', { params: this.$route.query })
           .then((response) => {
             this.users = response.data.users;
             this.usersCount = response.data.totalUsersCount;
@@ -82,17 +75,6 @@ export default {
           });
       });
     },
-    changePage(page) {
-      this.query_params.page = page;
-      this.$router.push({ path: '/users', query: this.query_params });
-      this.fetchUsers();
-    },
-    changePerPageCount(count) {
-      this.query_params.perPage = count;
-      this.query_params.page = 1;
-      this.$router.push({ path: '/users', query: this.query_params });
-      this.fetchUsers();
-    },
   },
   beforeMount() {
     this.$title('Users');
@@ -101,6 +83,11 @@ export default {
   components: {
     TableHeader,
     UsersListProfile,
+  },
+  watch: {
+    $route() {
+      this.fetchUsers();
+    },
   },
 };
 </script>

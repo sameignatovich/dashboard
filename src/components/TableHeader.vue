@@ -2,11 +2,10 @@
   <div class="row row-cols-auto justify-content-center">
     <div class="col">
       <TableHeaderPagination :total-pages="totalPages"
-                  :current-page="currentPage"
-                  @change-page="changePage" />
+                             :current-page="currentPage" />
     </div>
     <div class="col">
-      <TableHeaderSelectItemsCount @change-per-page-count="changePerPageCount" />
+      <TableHeaderSelectItemsCount :current-count="currentCount" />
     </div>
     <div class="col">
       <TableHeaderItemsCounter :counting-items="itemName"
@@ -30,28 +29,20 @@ export default {
     },
     totalItemsCount: {
       type: Number,
-      required: false,
-    },
-    itemsPerPage: {
-      type: Number,
       required: true,
     },
     currentPage: {
       type: Number,
       required: true,
     },
+    currentCount: {
+      type: Number,
+      required: true,
+    },
   },
   computed: {
     totalPages() {
-      return Math.ceil(this.totalItemsCount / this.itemsPerPage);
-    },
-  },
-  methods: {
-    changePage(page) {
-      this.$emit('changePage', page);
-    },
-    changePerPageCount(count) {
-      this.$emit('changePerPageCount', count);
+      return Math.ceil(this.totalItemsCount / this.currentCount);
     },
   },
   components: {

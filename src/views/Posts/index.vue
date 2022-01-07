@@ -1,20 +1,17 @@
 <template>
   <h5 class="display-5 text-center">
     Posts
-    <span v-if="query_params.username">
-      {{ `of user ${query_params.username}` }}
+    <span v-if="$route.query.username">
+      {{ `of user ${$route.query.username}` }}
     </span>
-        <span v-if="query_params.tag">
-      {{ `with tag #${query_params.tag}` }}
+        <span v-if="$route.query.tag">
+      {{ `with tag #${$route.query.tag}` }}
     </span>
   </h5>
-  <table-header  :item-name="`posts`"
-                :table-items="posts"
+  <table-header item-name="posts"
                 :total-items-count="postsCount"
-                :items-per-page="query_params.perPage"
-                :current-page="query_params.page"
-                @change-page="changePage"
-                @change-per-page-count="changePerPageCount" />
+                :current-page="+$route.query.page || 1"
+                :current-count="+$route.query.count || 10" />
 
   <router-link to="/posts/new" class="btn btn-success m-2">
     <i class="bi bi-plus-lg"></i>
@@ -70,19 +67,13 @@ export default {
     return {
       posts: [],
       postsCount: 0,
-      query_params: {
-        page: +this.$route.query.page || 1,
-        perPage: +this.$route.query.perPage || 10,
-        username: this.$route.query.username,
-        tag: this.$route.query.tag,
-      },
       postForDeletion: {},
     };
   },
   methods: {
     fetchPosts() {
       return new Promise((resolve, reject) => {
-        this.$http.get('/posts', { params: this.query_params })
+        this.$http.get('/posts', { params: this.$route.query })
           .then((response) => {
             this.posts = response.data.posts;
             this.postsCount = response.data.totalPostsCount;
@@ -108,17 +99,6 @@ export default {
           });
       });
     },
-    changePage(page) {
-      this.query_params.page = page;
-      this.$router.push({ path: '/posts', query: this.query_params });
-      this.fetchPosts();
-    },
-    changePerPageCount(count) {
-      this.query_params.perPage = count;
-      this.query_params.page = 1;
-      this.$router.push({ path: '/posts', query: this.query_params });
-      this.fetchPosts();
-    },
   },
   beforeMount() {
     this.$title('Posts');
@@ -126,6 +106,11 @@ export default {
   },
   components: {
     TableHeader,
+  },
+  watch: {
+    $route() {
+      this.fetchPosts();
+    },
   },
 };
 </script>

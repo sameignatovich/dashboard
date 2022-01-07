@@ -15,7 +15,7 @@
       <li v-for="page in pages"
           :key="page"
           class="page-item"
-          :class="page == currentPage ? 'active' : ''">
+          :class="page == selectedPage ? 'active' : ''">
         <a class="page-link" href="#" @click.prevent="toPage(page)">
           {{ page }}
         </a>
@@ -37,6 +37,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      selectedPage: this.currentPage,
+    };
+  },
   props: {
     maxVisiblePages: {
       type: Number,
@@ -54,31 +59,31 @@ export default {
   },
   computed: {
     isFirst() {
-      return this.currentPage === 1;
+      return this.selectedPage === 1;
     },
     isLast() {
       if (this.totalPages === 0) {
         return true;
       }
-      return this.currentPage === this.totalPages;
+      return this.selectedPage === this.totalPages;
     },
     startPage() {
       // When on the first page
-      if (this.currentPage === 1) {
+      if (this.selectedPage === 1) {
         return 1;
       }
       // When on the last page
       if (this.totalPages < this.maxVisiblePages) {
         return 1;
       }
-      if (this.currentPage === this.totalPages) {
+      if (this.selectedPage === this.totalPages) {
         return this.totalPages - this.maxVisiblePages + 1;
       }
       // When in between
-      if ((this.currentPage - Math.floor(this.maxVisiblePages / 2)) < 1) {
+      if ((this.selectedPage - Math.floor(this.maxVisiblePages / 2)) < 1) {
         return 1;
       }
-      return this.currentPage - Math.floor(this.maxVisiblePages / 2);
+      return this.selectedPage - Math.floor(this.maxVisiblePages / 2);
     },
     endPage() {
       if (this.totalPages === 0) {
@@ -98,22 +103,36 @@ export default {
     },
   },
   methods: {
+    changeParams() {
+      this.$router.push();
+    },
     toFirstPage() {
-      this.$emit('changePage', 1);
+      this.selectedPage = 1;
     },
     toPreviousPage() {
-      this.$emit('changePage', this.currentPage - 1);
+      this.selectedPage -= 1;
     },
     toPage(page) {
-      if (page !== this.currentPage) {
-        this.$emit('changePage', page);
+      if (page !== this.selectedPage) {
+        this.selectedPage = page;
       }
     },
     toNextPage() {
-      this.$emit('changePage', this.currentPage + 1);
+      this.selectedPage += 1;
     },
     toLastPage() {
-      this.$emit('changePage', this.totalPages);
+      this.selectedPage = this.totalPages;
+    },
+  },
+  watch: {
+    selectedPage(to) {
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          ...this.$route.query,
+          page: to,
+        },
+      });
     },
   },
 };

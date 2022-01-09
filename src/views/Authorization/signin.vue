@@ -1,6 +1,6 @@
 <template>
   <div class="text-center" id="form-signin">
-    <form class="form-signin" @submit.prevent="signin">
+    <form class="form-signin" @submit.prevent="authorization">
       <h3 class="mb-3 fw-normal">Authorization</h3>
 
       <label for="emailInput" class="visually-hidden">Email</label>
@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -41,13 +43,11 @@ export default {
       password: '',
     };
   },
-  computed: {
-    errorMessage() {
-      return this.$store.getters['user/errorMessage'];
-    },
-  },
+  computed: mapGetters({
+    errorMessage: 'user/errorMessage',
+  }),
   methods: {
-    signin() {
+    authorization() {
       const signinData = {
         user: {
           email: this.email,
@@ -55,7 +55,7 @@ export default {
         },
       };
 
-      this.$store.dispatch('user/signin', signinData)
+      this.signin(signinData)
         .then(() => {
           if (this.$route.query.redirect != null) {
             this.$router.push(this.$route.query.redirect);
@@ -69,6 +69,9 @@ export default {
           this.password = '';
         });
     },
+    ...mapActions({
+      signin: 'user/signin',
+    }),
   },
   beforeMount() {
     this.$title('Signin');

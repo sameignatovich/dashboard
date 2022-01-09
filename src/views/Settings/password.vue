@@ -2,7 +2,7 @@
   <h1 class="text-center">
     Change password
   </h1>
-  <form @submit.prevent="updatePassword">
+  <form @submit.prevent="newPassword">
     <div class="row mb-5">
       <label for="fullnameInput" class="col-sm-3 col-form-label">Current password</label>
       <div class="col-sm-9">
@@ -49,13 +49,15 @@
     <div class="row mb-3">
       <div class="col-sm-9 offset-sm-3">
         <button-spinner :loading="loading"
-                        text="Change password" />
+                        text="Change password"
+                        type="submit" />
       </div>
     </div>
   </form>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import ButtonSpinner from '@/components/ButtonSpinner.vue';
 
 export default {
@@ -70,11 +72,11 @@ export default {
     this.$title('Change password');
   },
   methods: {
-    updatePassword() {
+    newPassword() {
       this.errors = {};
       this.loading = true;
 
-      this.$store.dispatch('user/updatePassword', this.user)
+      this.updatePassword(this.user)
         .then(() => {
           this.$toast.success('Password changed!');
         })
@@ -86,6 +88,9 @@ export default {
           this.loading = false;
         });
     },
+    ...mapActions({
+      updatePassword: 'user/updatePassword',
+    }),
   },
   components: {
     ButtonSpinner,

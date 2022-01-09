@@ -32,7 +32,7 @@
         </li>
         <li><hr class="dropdown-divider"></li>
         <li>
-          <button @click="signout"
+          <button @click="exit"
                   class="dropdown-item">
             <i class="bi bi-box-arrow-left"></i>
             Sign out
@@ -44,22 +44,23 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
-  computed: {
-    authorized() {
-      return this.$store.getters['user/isAuthorized'];
-    },
-    user() {
-      return this.$store.getters['user/user'];
-    },
-  },
+  computed: mapGetters({
+    authorized: 'user/isAuthorized',
+    user: 'user/user',
+  }),
   methods: {
-    signout() {
-      this.$store.dispatch('user/signout')
+    exit() {
+      this.signout()
         .then(() => {
           this.$router.push('/');
         });
     },
+    ...mapActions({
+      signout: 'user/signout',
+    }),
   },
 };
 </script>

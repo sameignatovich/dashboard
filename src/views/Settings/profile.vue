@@ -2,7 +2,7 @@
   <h1 class="text-center">
     Edit User
   </h1>
-  <form @submit.prevent="updateProfile">
+  <form @submit.prevent="newProfile">
     <div class="row mb-3">
       <label for="fullnameInput" class="col-sm-2 col-form-label">Full name</label>
       <div class="col-sm-10">
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import ButtonSpinner from '@/components/ButtonSpinner.vue';
 
 export default {
@@ -73,20 +73,18 @@ export default {
       errors: {},
     };
   },
-  computed: {
-    ...mapGetters({
-      storedUser: 'user/user',
-    }),
-  },
+  computed: mapGetters({
+    storedUser: 'user/user',
+  }),
   beforeMount() {
     this.$title('Edit profile');
   },
   methods: {
-    updateProfile() {
+    newProfile() {
       this.errors = {};
       this.loading = true;
 
-      this.$store.dispatch('user/updateProfile', this.user)
+      this.updateProfile(this.user)
         .then(() => {
           this.$toast.success('Profile updated!');
         })
@@ -98,6 +96,9 @@ export default {
           this.loading = false;
         });
     },
+    ...mapActions({
+      updateProfile: 'user/updateProfile',
+    }),
   },
   components: {
     ButtonSpinner,

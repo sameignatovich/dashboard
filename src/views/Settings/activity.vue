@@ -83,6 +83,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
@@ -91,9 +93,9 @@ export default {
     };
   },
   computed: {
-    currentTokenId() {
-      return this.$store.getters['user/tokenId'];
-    },
+    ...mapGetters({
+      currentTokenId: 'user/tokenId',
+    }),
     activeTokens() {
       return this.tokens.filter((element) => element.active);
     },

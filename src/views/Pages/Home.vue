@@ -68,15 +68,18 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
-  computed: {
-    info() {
-      return this.$store.getters['info/info'];
-    },
-  },
+  computed: mapGetters({
+    info: 'info/info',
+  }),
+  methods: mapActions({
+    fetchInfo: 'info/fetchInfo',
+  }),
   beforeMount() {
     this.$title('Home');
-    this.$store.dispatch('info/fetchInfo');
+    this.fetchInfo();
   },
 };
 </script>

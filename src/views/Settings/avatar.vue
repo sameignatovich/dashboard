@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import VueCropper from 'vue-cropperjs';
 
 export default {
@@ -55,7 +56,7 @@ export default {
         const formData = new FormData();
         formData.append('user[avatar]', blob);
 
-        this.$store.dispatch('user/updateAvatar', formData)
+        this.updateAvatar(formData)
           .then(() => {
             this.$toast.success('Avatar successfully updated!');
           })
@@ -64,6 +65,9 @@ export default {
           });
       }, 'image/png');
     },
+    ...mapActions({
+      updateAvatar: 'user/updateAvatar',
+    }),
   },
   beforeMount() {
     this.$title('Change avatar');

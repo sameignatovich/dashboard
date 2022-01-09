@@ -1,84 +1,91 @@
 <template>
   <h5 class="text-center display-5">New post</h5>
-    <div class="row mb-3">
-      <label for="title" class="col-md-2 col-form-label">
-        Title
-      </label>
-      <div class="col-md-10">
-        <input v-model="post.title"
+  <div class="row mb-3">
+    <label for="title" class="col-md-2 col-form-label">
+      Title
+    </label>
+    <div class="col-md-10">
+      <input v-model="post.title"
+             placeholder="Post title"
+             type="text"
+             class="form-control"
+             :class="{'is-invalid': errors.title}"
+             required>
+      <div class="invalid-feedback">
+        <ul>
+          <li v-for="inputError in errors.title" :key="inputError">
+            {{ inputError }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="text" class="col-md-2 col-form-label">
+      Content
+    </label>
+    <div class="col-md-10">
+      <!--<textarea v-model="post.content"
+                class="form-control"
+                :class="{'is-invalid': errors.content}"
+                rows="5"
+                required>
+      </textarea>-->
+      <trix inputId="new-post"
+            v-model="post.content"
+            placeholder="Put your content here"
+            :class="{'is-invalid': errors.content}" />
+      <div class="invalid-feedback">
+        <ul>
+          <li v-for="inputError in errors.content" :key="inputError">
+            {{ inputError }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="tag" class="col-md-2 col-form-label">
+      Tags
+    </label>
+    <div class="col-md-10">
+      <div class="input-group mb-2">
+        <input v-model="tag"
+               placeholder="Tag name"
+               @keyup.enter="addTag"
                type="text"
-               class="form-control"
-               :class="{'is-invalid': errors.title}"
-               required>
-        <div class="invalid-feedback">
-          <ul>
-            <li v-for="inputError in errors.title" :key="inputError">
-              {{ inputError }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="text" class="col-md-2 col-form-label">
-        Text
-      </label>
-      <div class="col-md-10">
-        <textarea v-model="post.content"
-                  class="form-control"
-                  :class="{'is-invalid': errors.content}"
-                  rows="5"
-                  required>
-        </textarea>
-        <div class="invalid-feedback">
-          <ul>
-            <li v-for="inputError in errors.content" :key="inputError">
-              {{ inputError }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="tag" class="col-md-2 col-form-label">
-        Tags
-      </label>
-      <div class="col-md-10">
-        <div class="input-group mb-2">
-          <input v-model="tag"
-                 @keyup.enter="addTag"
-                 type="text"
-                 class="form-control">
-          <button @click="addTag"
-                  class="btn btn-outline-secondary"
-                  type="button" >
-            Add Tag
-          </button>
-        </div>
-        <button v-for="(tag, index) in post.tags_list"
-                :key="tag"
-                @click="removeTag(index)"
-                type="button"
-                class="btn btn-sm btn-secondary m-1 remove-tag">
-          #{{ tag }}
+               class="form-control">
+        <button @click="addTag"
+                class="btn btn-outline-secondary"
+                type="button" >
+          Add Tag
         </button>
       </div>
+      <button v-for="(tag, index) in post.tags_list"
+              :key="tag"
+              @click="removeTag(index)"
+              type="button"
+              class="btn btn-sm btn-secondary m-1 remove-tag">
+        #{{ tag }}
+      </button>
     </div>
-    <button-spinner @click="createPost"
-                    :loading="loading"
-                    text="Post"
-                    waitingText="Posting..." />
+  </div>
+  <button-spinner @click="createPost"
+                  :loading="loading"
+                  text="Post"
+                  waitingText="Posting..." />
 </template>
 
 <script>
 import ButtonSpinner from '@/components/ButtonSpinner.vue';
+import Trix from '@/components/Trix.vue';
 
 export default {
   data() {
     return {
       post: {
         title: null,
-        text: null,
+        content: '',
         tags_list: [],
       },
       tag: null,
@@ -120,6 +127,7 @@ export default {
     this.$title('New post');
   },
   components: {
+    Trix,
     ButtonSpinner,
   },
 };

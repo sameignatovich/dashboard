@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: "error" */
+
 const zlib = require('zlib');
 
 module.exports = {
@@ -45,6 +47,18 @@ module.exports = {
       appleTouchIcon: 'img/icons/apple-touch-icon-152x152.png',
       msTileImage: 'img/icons/msapplication-icon-144x144.png',
     },
+  },
+
+  chainWebpack: (config) => {
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap((options) => {
+        options.compilerOptions = {
+          isCustomElement: (tag) => tag.startsWith('trix-'),
+        };
+        return options;
+      });
   },
 
   pluginOptions: {

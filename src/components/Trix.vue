@@ -1,0 +1,71 @@
+<template>
+  <div>
+    <trix-editor
+      ref="trix"
+      @trix-change="handleContentChange"
+      @trix-file-accept="fileAccept"
+      :placeholder="placeholder"
+    />
+  </div>
+</template>
+
+<script>
+import 'trix';
+
+export default {
+  props: {
+    inputId: {
+      type: String,
+      required: true,
+    },
+    modelValue: {
+      type: String,
+      required: true,
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: 'Put your text here',
+    },
+  },
+  emits: [
+    'update:modelValue',
+  ],
+  methods: {
+    handleContentChange(event) {
+      this.$emit('update:modelValue', event.target.value);
+    },
+    fileAccept(event) {
+      event.preventDefault();
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+  @import "trix/dist/trix";
+  /*
+  .trix-content .attachment-gallery > action-text-attachment,
+  .trix-content .attachment-gallery > .attachment {
+    flex: 1 0 33%;
+    padding: 0 0.5em;
+    max-width: 33%;
+  }
+
+  .trix-content .attachment-gallery.attachment-gallery--2 > action-text-attachment,
+  .trix-content .attachment-gallery.attachment-gallery--2 > .attachment,
+  .trix-content .attachment-gallery.attachment-gallery--4 > action-text-attachment,
+  .trix-content .attachment-gallery.attachment-gallery--4 > .attachment {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  .trix-content action-text-attachment .attachment {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+  */
+  .trix-button-group.trix-button-group--file-tools {
+      display:none;
+  }
+</style>

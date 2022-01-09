@@ -70,10 +70,14 @@
       </button>
     </div>
   </div>
-  <button-spinner @click="createPost"
-                  :loading="loading"
-                  text="Post"
-                  waitingText="Posting..." />
+  <div class="row mb-3">
+    <div class="col-md-10 offset-md-2">
+      <button-spinner @click="createPost"
+                      :loading="loading"
+                      text="Post"
+                      waitingText="Posting..." />
+    </div>
+  </div>
 </template>
 
 <script>

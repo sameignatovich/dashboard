@@ -1,7 +1,9 @@
 <template>
   <div class="text-center" id="form-signin">
     <form class="form-signin" @submit.prevent="authorization">
-      <h3 class="mb-3 fw-normal">Authorization</h3>
+      <h3 class="mb-3 fw-normal">
+        Authorization
+      </h3>
 
       <label for="emailInput" class="visually-hidden">Email</label>
       <input  type="email"
@@ -19,7 +21,11 @@
               placeholder="Password"
               required>
 
-      <button type="submit" class="w-100 btn btn-lg btn-primary">Submit</button>
+      <button-spinner :loading="loading"
+                      classNames="w-100 btn-lg btn-primary"
+                      text="Sign in"
+                      waitingText="Authorizing..."
+                      type="submit" />
 
       <!--<
       div class="additional-links pt-3 text-start">
@@ -35,12 +41,14 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import ButtonSpinner from '@/components/ButtonSpinner.vue';
 
 export default {
   data() {
     return {
       email: '',
       password: '',
+      loading: false,
     };
   },
   computed: mapGetters({
@@ -48,6 +56,8 @@ export default {
   }),
   methods: {
     authorization() {
+      this.loading = true;
+
       const signinData = {
         user: {
           email: this.email,
@@ -67,6 +77,9 @@ export default {
         .catch(() => {
           this.$toast.error(this.errorMessage);
           this.password = '';
+        })
+        .then(() => {
+          this.loading = false;
         });
     },
     ...mapActions({
@@ -75,6 +88,9 @@ export default {
   },
   beforeMount() {
     this.$title('Signin');
+  },
+  components: {
+    ButtonSpinner,
   },
 };
 </script>

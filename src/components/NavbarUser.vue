@@ -56,6 +56,7 @@ export default {
       this.signout()
         .then(() => {
           this.$router.push('/');
+          this.$toast.success('Signed out!');
         });
     },
     ...mapActions({

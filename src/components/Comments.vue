@@ -6,7 +6,7 @@
             :key="comment.id"
             class="m-1 p-1 border-start border-3 border-dark">
         <div class="comment-header">
-          <router-link :to="`/users/${comment.author.user_id}`" class="fw-bold me-1">
+          <router-link :to="`/users/${comment.author.username}`" class="fw-bold me-1">
             <img  :src='comment.author.avatar'
                   class="rounded"
                   height="32" />

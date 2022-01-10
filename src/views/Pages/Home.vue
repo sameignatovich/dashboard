@@ -14,7 +14,7 @@
             <div class="col-md-4">
               <b>Users count</b>
               <br/>
-              {{ info.users.users_count }}
+              {{ info.users.users_count.toLocaleString() }}
             </div>
             <div class="col-md-4">
               <b>Last user</b>
@@ -33,7 +33,7 @@
             <div class="col-md-4">
               <b>Posts count</b>
               <br/>
-              {{ info.posts.posts_count }}
+              {{ info.posts.posts_count.toLocaleString() }}
             </div>
             <div class="col-md-4">
               <b>Last post</b>
@@ -52,7 +52,7 @@
             <div class="col-md-4">
               <b>Comments count</b>
               <br/>
-              {{ info.comments.comments_count }}
+              {{ info.comments.comments_count.toLocaleString() }}
             </div>
             <div class="col-md-4">
               <b>Last comment</b>

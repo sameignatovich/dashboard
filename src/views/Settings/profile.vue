@@ -1,6 +1,6 @@
 <template>
   <h1 class="text-center">
-    Edit User
+    Edit profile
   </h1>
   <form @submit.prevent="newProfile">
     <div class="row mb-3">

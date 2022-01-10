@@ -25,12 +25,6 @@
       Content
     </label>
     <div class="col-md-10">
-      <!--<textarea v-model="post.content"
-                class="form-control"
-                :class="{'is-invalid': errors.content}"
-                rows="5"
-                required>
-      </textarea>-->
       <trix inputId="new-post"
             v-model="post.content"
             placeholder="Put your content here"
@@ -71,6 +65,20 @@
     </div>
   </div>
   <div class="row mb-3">
+    <label for="tag" class="col-md-2 col-form-label">
+      Status
+    </label>
+    <div class="col-md-10">
+      <select v-model="post.status"
+              class="form-select"
+              aria-label="Select post status">
+        <option disabled value="">Select post status</option>
+        <option value="0">Draft</option>
+        <option value="1">Published</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-3">
     <div class="col-md-10 offset-md-2">
       <button-spinner @click="createPost"
                       :loading="loading"
@@ -91,6 +99,7 @@ export default {
         title: null,
         content: '',
         tags_list: [],
+        status: 0,
       },
       tag: null,
       loading: false,

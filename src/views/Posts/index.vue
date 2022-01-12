@@ -23,7 +23,7 @@
          :key='post.id'
          class="shadow p-3 mb-3 bg-body rounded post-item row">
       <div class="col-sm-1 d-flex align-items-center justify-content-center">
-        <div class="btn-group" role="group">
+        <div class="btn-group post-actions" role="group">
           <button :id="`post-actions-${post.id}`"
                   type="button"
                   class="btn btn-light dropdown-toggle"
@@ -147,6 +147,14 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+  .post-item .post-actions{
+    visibility: hidden;
+  }
+
+  .post-item:hover .post-actions{
+    visibility: visible;
+  }
+
   .post-enter-active,
   .post-leave-active {
     transition: all .5s ease;

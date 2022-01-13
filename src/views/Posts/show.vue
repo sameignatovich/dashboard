@@ -1,5 +1,7 @@
 <template>
-  <post :post="post" :loading="postLoading" />
+  <post :post="post"
+        :loading="postLoading"
+        @post:delete="deletePost" />
   <comments :comments="comments" :loading="commentsLoading" />
 </template>
 
@@ -54,6 +56,19 @@ export default {
           .catch((error) => {
             reject(error);
             this.commentsLoading = false;
+          });
+      });
+    },
+    deletePost() {
+      return new Promise((resolve, reject) => {
+        this.$http.delete(`/posts/${this.post.id}`)
+          .then((response) => {
+            this.$toast.success('Post deleted!');
+            this.$router.push('/posts');
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
           });
       });
     },

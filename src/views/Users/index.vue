@@ -35,6 +35,7 @@
 <script>
 import TableHeader from '@/components/TableHeader.vue';
 import UsersListProfile from '@/components/UsersListProfile.vue';
+import fullPathResolution from '@/mixins/fullPathResolution';
 
 export default {
   data() {
@@ -85,10 +86,13 @@ export default {
     UsersListProfile,
   },
   watch: {
-    $route() {
+    fullPath() {
       this.fetchUsers();
     },
   },
+  mixins: [
+    fullPathResolution,
+  ],
 };
 </script>
 

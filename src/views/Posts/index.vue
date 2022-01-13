@@ -89,6 +89,7 @@
 <script>
 import TableHeader from '@/components/TableHeader.vue';
 import capitalizeFirstLetter from '@/mixins/capitalizeFirstLetter';
+import fullPathResolution from '@/mixins/fullPathResolution';
 
 export default {
   data() {
@@ -136,11 +137,12 @@ export default {
     TableHeader,
   },
   watch: {
-    $route() {
+    fullPath() {
       this.fetchPosts();
     },
   },
   mixins: [
+    fullPathResolution,
     capitalizeFirstLetter,
   ],
 };

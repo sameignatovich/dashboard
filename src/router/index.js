@@ -7,6 +7,10 @@ import Posts from './Posts';
 import Settings from './Settings';
 
 const routes = [
+  {
+    path: '/',
+    redirect: '/statistics/main',
+  },
   ...Pages,
   ...Authorization,
   ...Users,

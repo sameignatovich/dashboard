@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Dashboard</a>
+      <router-link to="/" class="navbar-brand">
+        Dashboard
+      </router-link>
       <button class="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
@@ -15,8 +17,8 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <router-link to="/" class='nav-link'>
-              <i class="bi bi-house-fill"></i>
-              Home
+              <i class="bi bi-pie-chart-fill"></i>
+              Statistics
             </router-link>
           </li>
           <li class="nav-item">

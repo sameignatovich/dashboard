@@ -1,6 +1,6 @@
 import axios from '@/plugins/axios';
 
-const informationModule = {
+const statisticsModule = {
   namespaced: true,
 
   state() {
@@ -29,7 +29,7 @@ const informationModule = {
   actions: {
     fetchInfo({ commit }) {
       return new Promise((resolve, reject) => {
-        axios.get('/information/summary')
+        axios.get('/statistics/summary')
           .then((response) => {
             commit('SET_INFO', response.data);
             resolve(response);
@@ -45,4 +45,4 @@ const informationModule = {
   },
 };
 
-export default informationModule;
+export default statisticsModule;

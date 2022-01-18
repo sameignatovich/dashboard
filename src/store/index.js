@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import userModule from './User';
-import informationModule from './Information';
+import statisticsModule from './Statistics';
 
 export default createStore({
   strict: process.env.NODE_ENV !== 'production',
@@ -12,7 +12,7 @@ export default createStore({
   actions: {
   },
   modules: {
-    info: informationModule,
+    statistics: statisticsModule,
     user: userModule,
   },
 });

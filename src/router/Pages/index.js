@@ -1,8 +1,8 @@
 export default [
   {
     path: '/',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "pages" */ '@/views/Pages/Home.vue'),
+    name: 'Statistics',
+    component: () => import(/* webpackChunkName: "pages" */ '@/views/Pages/Statistics.vue'),
     meta: {
       requiresAuth: false,
     },

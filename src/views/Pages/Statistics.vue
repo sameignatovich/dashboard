@@ -72,13 +72,13 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: mapGetters({
-    info: 'info/info',
+    info: 'statistics/info',
   }),
   methods: mapActions({
-    fetchInfo: 'info/fetchInfo',
+    fetchInfo: 'statistics/fetchInfo',
   }),
   beforeMount() {
-    this.$title('Home');
+    this.$title('Statistics');
     this.fetchInfo();
   },
 };

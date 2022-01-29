@@ -26,7 +26,7 @@
                   :itemName='userForDeletion.username'
                   acceptButton='Delete'
                   acceptButtonClass='btn-danger'
-                  @accept-event="deleteUser(userForDeletion.id)"
+                  @accept-event="deleteUser(userForDeletion.username)"
                   @cancel-event="userForDeletion = {}"
                   id="deleteUser">
   </modal-dialogue>
@@ -72,6 +72,7 @@ export default {
             resolve(response);
           })
           .catch((error) => {
+            this.$toast.error('Error during user deletion');
             reject(error);
           });
       });
